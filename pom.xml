@@ -19,7 +19,7 @@
         <project.reporting.outputEncoding>${encoding}</project.reporting.outputEncoding>
         <project.resources.sourceEncoding>${encoding}</project.resources.sourceEncoding>
 
-        <hibernate.version>5.2.3.Final</hibernate.version>
+        <hibernate.version>5.4.3.Final</hibernate.version>
         <hibernate.validator.version>5.2.1.Final</hibernate.validator.version>
         <oracle.version>12.1.0.2</oracle.version>
         <lombok.version>1.16.8</lombok.version>

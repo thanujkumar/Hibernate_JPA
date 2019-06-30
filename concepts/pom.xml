@@ -45,5 +45,25 @@
         </dependency>
     </dependencies>
 
+     <build>
+         <plugins>
+              <plugin>
+                  <!-- https://vladmihalcea.com/how-to-enable-bytecode-enhancement-dirty-checking-in-hibernate/ -->
+                  <groupId>org.hibernate.orm.tooling</groupId>
+                  <artifactId>hibernate-enhance-maven-plugin</artifactId>
+                  <version>${hibernate.version}</version>
+                  <executions>
+                      <execution>
+                          <configuration>
+                              <enableDirtyTracking>true</enableDirtyTracking>
+                          </configuration>
+                          <goals>
+                              <goal>enhance</goal>
+                          </goals>
+                      </execution>
+                  </executions>
+              </plugin>
+         </plugins>
+     </build>
 
 </project>
