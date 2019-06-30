@@ -1,6 +1,7 @@
 package com.tk.annotation.inheritance.joinedtable.stratergy2;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -51,11 +52,12 @@ import javax.persistence.*;
 @Table(name = "VEHICLE_JOINED")
 @Data
 @Inheritance(strategy = InheritanceType.JOINED)
+@ToString
 @DiscriminatorColumn(name = "VEHICLE_TYPE")
 public abstract class VehicleJoinedEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO) //HIBERNATE_SEQUENCE global is used
 	@Column(name = "VEHICLE_ID")
 	private int vehicleId;
 
