@@ -66,6 +66,7 @@
                 <artifactId>hibernate-jpamodelgen</artifactId>
                 <version>${hibernate.version}</version>
             </dependency>
+            <!-- validation api, this require EL  -->
             <dependency>
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-validator</artifactId>
@@ -81,6 +82,14 @@
                 <artifactId>javax.el</artifactId>
                 <version>${glassfish.javax.el.impl.version}</version>
             </dependency>
+            <!-- To populate audit colums -->
+            <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-envers -->
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-envers</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+
 
 
             <dependency>

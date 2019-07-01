@@ -25,6 +25,6 @@ public class Product {
     @Column(name = "QUANTITY")
     private int quantity;
 
-    @Version
+    @Version //Required for optimistic locking
     private Long version;
 }
