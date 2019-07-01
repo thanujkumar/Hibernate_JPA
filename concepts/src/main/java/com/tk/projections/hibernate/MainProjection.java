@@ -59,17 +59,31 @@ public class MainProjection {
         System.out.println("TypedQuery JPQL :============== "+ post1);
 
         //PROJECTION -- list all posts
-        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-        CriteriaQuery<Post> criteriaQuery = criteriaBuilder.createQuery(Post.class);
-        Root<Post> root = criteriaQuery.from(Post.class);
-        criteriaQuery.select(root); //N+1 problem, as for every post, comment is queried due to toString and as it
+        CriteriaBuilder criteriaBuilderP = session.getCriteriaBuilder();
+        CriteriaQuery<Post> criteriaQueryP = criteriaBuilderP.createQuery(Post.class);
+        Root<Post> rootP = criteriaQueryP.from(Post.class);
+        criteriaQueryP.select(rootP); //N+1 problem, as for every post, comment is queried due to toString and as it
         // bi-directional multiple queries are triggered and becomes recursive (stackoverflow exception)
         //alter system set open_cursors = 1000 scope=both;
-        Query query = session.createQuery(criteriaQuery);
-        List<Post> results = query.getResultList();
+        Query queryP = session.createQuery(criteriaQueryP);
+        List<Post> resultsP = queryP.getResultList();
 
-        results.forEach(x -> {
+        resultsP.forEach(x -> {
             System.out.println(x);
+        });
+
+        //PROJECTION -- list all comments
+
+        CriteriaBuilder criteriaBuilderC = session.getCriteriaBuilder();
+        CriteriaQuery<Comment> criteriaQueryC = criteriaBuilderC.createQuery(Comment.class);
+        Root<Comment> rootC = criteriaQueryC.from(Comment.class);
+        criteriaQueryC.select(rootC); //As Comment is owning side automatically Post is loaded
+        Query queryC = session.createQuery(criteriaQueryC);
+        List<Comment> resultsC = queryC.getResultList();
+
+        resultsC.forEach(x -> {
+            System.out.println(x);
+            System.out.println(x.getPost());
         });
 
         session.getTransaction().commit();
