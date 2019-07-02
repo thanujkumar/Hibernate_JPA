@@ -5,7 +5,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.AvailableSettings;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -50,8 +52,8 @@ public class MainCheckChildToParent {
 
             }
         });
-        configuration.addAnnotatedClass(PostParent.class);
-        configuration.addAnnotatedClass(CommentChild.class);
+        configuration.addAnnotatedClass(PostParentC.class);
+        configuration.addAnnotatedClass(CommentChildP.class);
 
         //--------------Building SessionFactory-----------------
         SessionFactory sessionFactory =
@@ -62,14 +64,14 @@ public class MainCheckChildToParent {
         session.beginTransaction();
 
         //This would generate 7 sql statements - 1 insert to post, 3 insert to comments and 3 updates to comments
-        PostParent post = new PostParent();
+        PostParentC post = new PostParentC();
         post.setTitle("This is the Topic 2");
 
-        CommentChild comment1 = new CommentChild("Comment 1");
+        CommentChildP comment1 = new CommentChildP("Comment 1");
         comment1.setPost(post);
-        CommentChild comment2 = new CommentChild("Comment 2");
+        CommentChildP comment2 = new CommentChildP("Comment 2");
         comment2.setPost(post);
-        CommentChild comment3 = new CommentChild("Comment 3");
+        CommentChildP comment3 = new CommentChildP("Comment 3");
         comment3.setPost(post);
 
         session.save(post);
@@ -80,5 +82,45 @@ public class MainCheckChildToParent {
         session.getTransaction().commit();
         session.close();
 
+
+        //Loading child
+        session = sessionFactory.openSession();
+        session.beginTransaction();
+
+        CommentChildP comment = session.find(CommentChildP.class, 1L);
+        System.out.println(comment);
+        System.out.println(comment.getPost());
+
+        session.getTransaction().commit();
+        session.close();
+
+        //Loading using JPQL
+        session = sessionFactory.openSession();
+        session.beginTransaction();
+        Query<CommentChildP> query = session.createQuery("SELECT C  FROM CommentChildP C JOIN FETCH C.post",
+                CommentChildP.class);
+
+        List<CommentChildP> qlist = query.getResultList();
+        for (CommentChildP child : qlist) {
+            System.out.println(child);
+        }
+        session.getTransaction().commit();
+        session.close();
+
+
+        //https://www.baeldung.com/hibernate-criteria-queries
+        //Loading using JPQL where clause
+        session = sessionFactory.openSession();
+        session.beginTransaction();
+        query = session.createQuery("SELECT C  FROM CommentChildP C JOIN FETCH C.post P WHERE P.id = :ID",
+                CommentChildP.class);
+        query.setParameter("ID", 1L);
+
+        qlist = query.getResultList();
+        for (CommentChildP child : qlist) {
+            System.out.println(child);
+        }
+        session.getTransaction().commit();
+        session.close();
     }
 }

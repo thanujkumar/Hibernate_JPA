@@ -1,4 +1,4 @@
-package com.tk.projections.hibernate;
+package com.tk.projections.hibernate.bidirectional;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -52,7 +52,7 @@ public class MainProjection {
 
         //No projects but typed query
         //SELECT P FROM PostWrong P JOIN FETCH P.comments WHERE P.id = :POST_ID
-        TypedQuery<Post> jpaQuery = session.createQuery("SELECT P FROM PostWrong P  WHERE P.id = " +
+        TypedQuery<Post> jpaQuery = session.createQuery("SELECT P FROM Post P  WHERE P.id = " +
                 ":POST_ID", Post.class);
         jpaQuery.setParameter("POST_ID", 1L);
         Post post1= jpaQuery.getSingleResult();
@@ -72,19 +72,18 @@ public class MainProjection {
             System.out.println(x);
         });
 
-        //PROJECTION -- list all comments
-
-        CriteriaBuilder criteriaBuilderC = session.getCriteriaBuilder();
-        CriteriaQuery<Comment> criteriaQueryC = criteriaBuilderC.createQuery(Comment.class);
-        Root<Comment> rootC = criteriaQueryC.from(Comment.class);
-        criteriaQueryC.select(rootC); //As CommentWrong is owning side automatically PostWrong is loaded
-        Query queryC = session.createQuery(criteriaQueryC);
-        List<Comment> resultsC = queryC.getResultList();
-
-        resultsC.forEach(x -> {
-            System.out.println(x);
-            System.out.println(x.getPost());
-        });
+//        //PROJECTION -- list all comments
+//        CriteriaBuilder criteriaBuilderC = session.getCriteriaBuilder();
+//        CriteriaQuery<Comment> criteriaQueryC = criteriaBuilderC.createQuery(Comment.class);
+//        Root<Comment> rootC = criteriaQueryC.from(Comment.class);
+//        criteriaQueryC.select(rootC); //As CommentWrong is owning side automatically PostWrong is loaded
+//        Query queryC = session.createQuery(criteriaQueryC);
+//        List<Comment> resultsC = queryC.getResultList();
+//
+//        resultsC.forEach(x -> {
+//            System.out.println(x);
+//            System.out.println(x.getPost());
+//        });
 
         session.getTransaction().commit();
         session.close();

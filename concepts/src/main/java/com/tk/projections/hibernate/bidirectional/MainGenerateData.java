@@ -1,25 +1,16 @@
-package com.tk.projections.hibernate.unidirection.child;
+package com.tk.projections.hibernate.bidirectional;
 
-
-import com.tk.projections.hibernate.Post;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.AvailableSettings;
 import org.hibernate.cfg.Configuration;
 
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-import java.util.List;
 import java.util.Properties;
+import java.util.Random;
+import java.util.stream.IntStream;
 
-//https://www.baeldung.com/hibernate-criteria-queries
-//https://www.javacodegeeks.com/2018/04/jpa-tips-avoiding-the-n-1-select-problem.html
-public class MainProjectionUnidirectionChild {
-
+public class MainGenerateData {
     public static void main(String[] args) throws Exception {
 
         //property or xml or programmatic configuration
@@ -37,7 +28,7 @@ public class MainProjectionUnidirectionChild {
                 put(AvailableSettings.FORMAT_SQL, true);
                 put(AvailableSettings.GENERATE_STATISTICS, true);
                 put(AvailableSettings.FAIL_ON_PAGINATION_OVER_COLLECTION_FETCH, true);
-                put(AvailableSettings.HBM2DDL_AUTO, "update");
+                put(AvailableSettings.HBM2DDL_AUTO, "create-drop");
 
             }
         });
@@ -52,19 +43,24 @@ public class MainProjectionUnidirectionChild {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
+        Random rand = new Random();
+        //PostWrong
+        IntStream.range(1, 5).forEach(p -> {
+            Post post = new Post();
+            post.setTitle("About Projections-"+p);
+            post.setContent("This example is about projects in hibernate-"+p);
+            post.setDescription("Hibernate projects-"+p);
+            session.save(post);
+            //Generate 5 comments
+            IntStream.range(1, rand.nextInt(10)).forEach(x -> {
+                Comment comment = new Comment();
+                comment.setPost(post);
+                comment.setText("CommentWrong"+x);
+                session.save(comment);
+            });
 
-        //PROJECTION -- list all comments
-        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-        CriteriaQuery<Comment> criteriaQuery = criteriaBuilder.createQuery(Comment.class);
-        Root<Comment> root = criteriaQuery.from(Comment.class);
-        criteriaQuery.select(root);
-
-        Query query = session.createQuery(criteriaQuery);
-        List<Comment> resultsP = query.getResultList();
-
-        resultsP.forEach(x -> {
-            System.out.println(x);
         });
+
 
         session.getTransaction().commit();
         session.close();

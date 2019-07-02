@@ -1,6 +1,5 @@
-package com.tk.projections.hibernate.unidirection.child;
+package com.tk.projections.hibernate.bidirectional;
 
-import com.tk.projections.hibernate.AuditModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -19,6 +18,8 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Data
+@ToString(callSuper = true)
+@EqualsAndHashCode(doNotUseGetters = true)
 @Table(name = "COMMENTS")
 public class Comment extends AuditModel {
 

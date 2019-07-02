@@ -1,6 +1,6 @@
 package com.tk.projections.hibernate.unidirection.wrongmapping;
 
-import com.tk.projections.hibernate.AuditModel;
+import com.tk.projections.hibernate.bidirectional.AuditModel;
 import lombok.Data;
 
 import javax.persistence.*;

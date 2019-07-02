@@ -1,10 +1,8 @@
-package com.tk.projections.hibernate;
+package com.tk.projections.hibernate.bidirectional;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -57,7 +55,6 @@ public class Post extends AuditModel {
 
     //https://www.baeldung.com/jpa-joincolumn-vs-mappedby
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "post") //EAGER Fails due to circular
-    // dependency
     private Set<Comment> comments = new HashSet<>();
 
 }

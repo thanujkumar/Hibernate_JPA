@@ -1,4 +1,4 @@
-package com.tk.projections.hibernate;
+package com.tk.projections.hibernate.bidirectional;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
