@@ -1,6 +1,7 @@
-package com.tk.projections.hibernate;
+package com.tk.projections.hibernate.unidirection.child;
 
-import antlr.collections.impl.IntRange;
+import com.tk.projections.hibernate.Comment;
+import com.tk.projections.hibernate.Post;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;

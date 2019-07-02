@@ -1,6 +1,5 @@
-package com.tk.projections.hibernate;
+package com.tk.projections.hibernate.unidirection.wrongmapping;
 
-import antlr.collections.impl.IntRange;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -8,15 +7,15 @@ import org.hibernate.cfg.AvailableSettings;
 import org.hibernate.cfg.Configuration;
 
 import java.util.Properties;
-import java.util.Random;
-import java.util.stream.IntStream;
 
-public class MainGenerateData {
+public class MainCheckWrongGeneratedTables {
+
     public static void main(String[] args) throws Exception {
 
         //property or xml or programmatic configuration
         Configuration configuration = new Configuration();
         configuration.setProperties(new Properties() {
+
             {
                 //https://docs.jboss.org/hibernate/orm/5.3/javadocs/constant-values.html
                 put(AvailableSettings.USER, "JPA2");
@@ -33,8 +32,8 @@ public class MainGenerateData {
 
             }
         });
-        configuration.addAnnotatedClass(Post.class);
-        configuration.addAnnotatedClass(Comment.class);
+        configuration.addAnnotatedClass(PostWrong.class);
+        configuration.addAnnotatedClass(CommentWrong.class);
 
         //--------------Building SessionFactory-----------------
         SessionFactory sessionFactory =
@@ -44,24 +43,14 @@ public class MainGenerateData {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        Random rand = new Random();
-        //PostWrong
-        IntStream.range(1, 5).forEach(p -> {
-            Post post = new Post();
-            post.setTitle("About Projections-"+p);
-            post.setContent("This example is about projects in hibernate-"+p);
-            post.setDescription("Hibernate projects-"+p);
-            session.save(post);
-            //Generate 5 comments
-            IntStream.range(1, rand.nextInt(10)).forEach(x -> {
-                Comment comment = new Comment();
-                comment.setPost(post);
-                comment.setText("CommentWrong"+x);
-                session.save(comment);
-            });
+        //This would generate 7 sql statements - 1 to post 3 to comments and 3 to join table
+        PostWrong post = new PostWrong();
+        post.setTitle("This is the Topic");
 
-        });
-
+        post.getComments().add(new CommentWrong("Comment 1"));
+        post.getComments().add(new CommentWrong("Comment 2"));
+        post.getComments().add(new CommentWrong("Comment 3"));
+        session.persist(post);
 
         session.getTransaction().commit();
         session.close();

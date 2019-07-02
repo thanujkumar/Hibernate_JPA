@@ -1,5 +1,7 @@
-package com.tk.projections.hibernate;
+package com.tk.projections.hibernate.unidirection.child;
 
+
+import com.tk.projections.hibernate.Post;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -16,7 +18,7 @@ import java.util.Properties;
 
 //https://www.baeldung.com/hibernate-criteria-queries
 //https://www.javacodegeeks.com/2018/04/jpa-tips-avoiding-the-n-1-select-problem.html
-public class MainProjection {
+public class MainProjectionUnidirectionChild {
 
     public static void main(String[] args) throws Exception {
 
@@ -50,40 +52,18 @@ public class MainProjection {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        //No projects but typed query
-        //SELECT P FROM PostWrong P JOIN FETCH P.comments WHERE P.id = :POST_ID
-        TypedQuery<Post> jpaQuery = session.createQuery("SELECT P FROM PostWrong P  WHERE P.id = " +
-                ":POST_ID", Post.class);
-        jpaQuery.setParameter("POST_ID", 1L);
-        Post post1= jpaQuery.getSingleResult();
-        System.out.println("TypedQuery JPQL :============== "+ post1);
 
-        //PROJECTION -- list all posts
-        CriteriaBuilder criteriaBuilderP = session.getCriteriaBuilder();
-        CriteriaQuery<Post> criteriaQueryP = criteriaBuilderP.createQuery(Post.class);
-        Root<Post> rootP = criteriaQueryP.from(Post.class);
-        criteriaQueryP.select(rootP); //N+1 problem, as for every post, comment is queried due to toString and as it
-        // bi-directional multiple queries are triggered and becomes recursive (stackoverflow exception)
-        //alter system set open_cursors = 1000 scope=both;
-        Query queryP = session.createQuery(criteriaQueryP);
-        List<Post> resultsP = queryP.getResultList();
+        //PROJECTION -- list all comments
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaQuery<Comment> criteriaQuery = criteriaBuilder.createQuery(Comment.class);
+        Root<Comment> root = criteriaQuery.from(Comment.class);
+        criteriaQuery.select(root);
+
+        Query query = session.createQuery(criteriaQuery);
+        List<Comment> resultsP = query.getResultList();
 
         resultsP.forEach(x -> {
             System.out.println(x);
-        });
-
-        //PROJECTION -- list all comments
-
-        CriteriaBuilder criteriaBuilderC = session.getCriteriaBuilder();
-        CriteriaQuery<Comment> criteriaQueryC = criteriaBuilderC.createQuery(Comment.class);
-        Root<Comment> rootC = criteriaQueryC.from(Comment.class);
-        criteriaQueryC.select(rootC); //As CommentWrong is owning side automatically PostWrong is loaded
-        Query queryC = session.createQuery(criteriaQueryC);
-        List<Comment> resultsC = queryC.getResultList();
-
-        resultsC.forEach(x -> {
-            System.out.println(x);
-            System.out.println(x.getPost());
         });
 
         session.getTransaction().commit();

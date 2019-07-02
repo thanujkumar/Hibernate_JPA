@@ -1,6 +1,5 @@
-package com.tk.projections.hibernate;
+package com.tk.projections.hibernate.unidirection.child_to_parent;
 
-import antlr.collections.impl.IntRange;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -8,15 +7,33 @@ import org.hibernate.cfg.AvailableSettings;
 import org.hibernate.cfg.Configuration;
 
 import java.util.Properties;
-import java.util.Random;
-import java.util.stream.IntStream;
 
-public class MainGenerateData {
+/**
+ * A JPA entity may be in one of the following states:
+ *
+ * <ul>
+ * <li><b>New/Transient</b>: the entity is not associated with a persistence context, be it a newly created object the database doesn’t know anything about.
+ * <li><b>Persistent</b>: the entity is associated with a persistence context (residing in the 1st Level Cache) and there is a database row representing this entity.
+ * <li><b>Detached</b>: the entity was previously associated with a persistence context, but the persistence context was closed, or the entity was manually evicted.
+ * <li><b>Removed</b>: the entity was marked as removed and the persistence context will remove it from the database at flush time.
+ * </ul>
+ * <p>
+ * Moving an object from one state to another is done by calling the EntityManager methods such as:
+ * <ul>
+ * <li>persist
+ * <li>merge
+ * <li>remove
+ * </ul>
+ * </p>
+ */
+public class MainCheckChildToParent {
+
     public static void main(String[] args) throws Exception {
 
         //property or xml or programmatic configuration
         Configuration configuration = new Configuration();
         configuration.setProperties(new Properties() {
+
             {
                 //https://docs.jboss.org/hibernate/orm/5.3/javadocs/constant-values.html
                 put(AvailableSettings.USER, "JPA2");
@@ -29,12 +46,12 @@ public class MainGenerateData {
                 put(AvailableSettings.FORMAT_SQL, true);
                 put(AvailableSettings.GENERATE_STATISTICS, true);
                 put(AvailableSettings.FAIL_ON_PAGINATION_OVER_COLLECTION_FETCH, true);
-                put(AvailableSettings.HBM2DDL_AUTO, "update");
+                put(AvailableSettings.HBM2DDL_AUTO, "create-drop");//create-drop
 
             }
         });
-        configuration.addAnnotatedClass(Post.class);
-        configuration.addAnnotatedClass(Comment.class);
+        configuration.addAnnotatedClass(PostParent.class);
+        configuration.addAnnotatedClass(CommentChild.class);
 
         //--------------Building SessionFactory-----------------
         SessionFactory sessionFactory =
@@ -44,24 +61,21 @@ public class MainGenerateData {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        Random rand = new Random();
-        //PostWrong
-        IntStream.range(1, 5).forEach(p -> {
-            Post post = new Post();
-            post.setTitle("About Projections-"+p);
-            post.setContent("This example is about projects in hibernate-"+p);
-            post.setDescription("Hibernate projects-"+p);
-            session.save(post);
-            //Generate 5 comments
-            IntStream.range(1, rand.nextInt(10)).forEach(x -> {
-                Comment comment = new Comment();
-                comment.setPost(post);
-                comment.setText("CommentWrong"+x);
-                session.save(comment);
-            });
+        //This would generate 7 sql statements - 1 insert to post, 3 insert to comments and 3 updates to comments
+        PostParent post = new PostParent();
+        post.setTitle("This is the Topic 2");
 
-        });
+        CommentChild comment1 = new CommentChild("Comment 1");
+        comment1.setPost(post);
+        CommentChild comment2 = new CommentChild("Comment 2");
+        comment2.setPost(post);
+        CommentChild comment3 = new CommentChild("Comment 3");
+        comment3.setPost(post);
 
+        session.save(post);
+        session.save(comment1);
+        session.save(comment2);
+        session.save(comment3);
 
         session.getTransaction().commit();
         session.close();
