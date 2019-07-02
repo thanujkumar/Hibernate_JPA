@@ -36,7 +36,7 @@ public class Comment extends AuditModel {
      * a foreign key to the referenced table. mappedBy indicates the entity is the inverse of the relationship.
      */
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "post_id", nullable = false) //Foreign key to PostWrong table id column
+    //@JoinColumn(name = "post_id", nullable = false) //Foreign key to PostWrong table id column
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Post post;
 }

@@ -24,6 +24,10 @@ public class PostParent extends AuditModel {
     @Column(unique = true)
     private String title;
 
+    /**
+     * @JoinColumn indicates the entity is the owner of the relationship and the corresponding table has a column with
+     * a foreign key to the referenced table. mappedBy indicates the entity is the inverse of the relationship.
+     */
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name="post_id", nullable = false) //parent to child
     private List<CommentChild> comments = new ArrayList<>();

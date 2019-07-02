@@ -55,6 +55,6 @@ public class Post extends AuditModel {
 
     //https://www.baeldung.com/jpa-joincolumn-vs-mappedby
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "post") //EAGER Fails due to circular
-    private Set<Comment> comments = new HashSet<>();
+    private Set<Comment> comments; // = new HashSet<>();
 
 }

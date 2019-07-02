@@ -55,7 +55,7 @@ public class MainGenerateData {
             IntStream.range(1, rand.nextInt(10)).forEach(x -> {
                 Comment comment = new Comment();
                 comment.setPost(post);
-                comment.setText("CommentWrong"+x);
+                comment.setText("Comment-"+x);
                 session.save(comment);
             });
 

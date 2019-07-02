@@ -16,6 +16,7 @@ import java.util.Properties;
 
 //https://www.baeldung.com/hibernate-criteria-queries
 //https://www.javacodegeeks.com/2018/04/jpa-tips-avoiding-the-n-1-select-problem.html
+//https://thoughts-on-java.org/hibernate-tips-map-bidirectional-many-one-association/
 public class MainProjection {
 
     public static void main(String[] args) throws Exception {
