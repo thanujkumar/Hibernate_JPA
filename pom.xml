@@ -9,6 +9,7 @@
     <modules>
         <module>concepts</module>
         <module>hibernate</module>
+        <module>playground</module>
     </modules>
 
     <properties>
