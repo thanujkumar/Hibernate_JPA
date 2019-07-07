@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+
+    <persistence-unit name="PLAYGROUND" transaction-type="RESOURCE_LOCAL">
+        <class>playground.model.Contact</class>
+        <class>playground.model.Country</class>
+        <class>playground.model.Location</class>
+        <!-- class>playground.model.Customer</class>
+        <class>playground.model.Employee</class>
+        <class>playground.model.Inventory</class>
+        <class>playground.model.InventoryPK</class>
+        <class>playground.model.Order</class>
+        <class>playground.model.OrderItem</class>
+        <class>playground.model.OrderItemPK</class>
+        <class>playground.model.Product</class>
+        <class>playground.model.ProductCategory</class>
+        <class>playground.model.Region</class>
+        <class>playground.model.Warehous</class -->
+
+
+        <properties>
+            <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521/orcl"/>
+            <property name="javax.persistence.jdbc.user" value="PLAYGROUND"/>
+            <property name="javax.persistence.jdbc.password" value="PLAYGROUND"/>
+            <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.driver.OracleDriver"/>
+
+            <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle12cDialect"/>
+            <property name="hibernate.default_schema" value="PLAYGROUND"/>
+            <!-- create = create all the time when run,
+                 update = update existing schema,
+                 create-drop = create during start and drop	when exit,
+                 validate = validate the schema, makes no changes to database -->
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <!--https://vladmihalcea.com/hibernate-statistics-jmx/ -->
+            <property name="hibernate.generate_statistics" value="true"/>
+            <property name="hibernate.jmx.enabled" value="true"/>
+            <!--https://vladmihalcea.com/hibernate-query-fail-on-pagination-over-collection-fetch/ -->
+            <property name="hibernate.query.fail_on_pagination_over_collection_fetch" value="true"/>
+        </properties>
+    </persistence-unit>
+</persistence>

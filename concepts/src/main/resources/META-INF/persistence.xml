@@ -22,7 +22,7 @@
             <property name="hibernate.connection.password" value="app" />
             <property name="hibernate.connection.url" value="jdbc:oracle:thin:@//localhost:1521/orcl" / -->
             <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle12cDialect"/>
-            <property name="hibernate.default_schema" value="JPA2"/>
+            <property name="hibernate.default_schema" value="PLAYGROUND"/>
             <!-- create = create all the time when run
                  update = update existing schema
                  create-drop = create during start and drop when exit

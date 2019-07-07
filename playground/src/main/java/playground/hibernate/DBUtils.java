@@ -1,4 +1,4 @@
-package jpa.playground;
+package playground.hibernate;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;

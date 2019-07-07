@@ -35,8 +35,11 @@ public class Comment extends AuditModel {
      * @JoinColumn indicates the entity is the owner of the relationship and the corresponding table has a column with
      * a foreign key to the referenced table. mappedBy indicates the entity is the inverse of the relationship.
      */
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    //@JoinColumn(name = "post_id", nullable = false) //Foreign key to PostWrong table id column
+    //@ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
+    //@JoinColumn(name = "post_id", nullable = false) //Foreign key to PostWrong table id column, not required as
+    @JoinColumn(name = "p_id")
+    // Posts has mappedBy
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Post post;
 }

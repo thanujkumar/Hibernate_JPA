@@ -36,7 +36,7 @@ public class MainProjection {
                 put(AvailableSettings.FORMAT_SQL, true);
                 put(AvailableSettings.GENERATE_STATISTICS, true);
                 put(AvailableSettings.FAIL_ON_PAGINATION_OVER_COLLECTION_FETCH, true);
-                put(AvailableSettings.HBM2DDL_AUTO, "update");
+                put(AvailableSettings.HBM2DDL_AUTO, "create-drop");
 
             }
         });
