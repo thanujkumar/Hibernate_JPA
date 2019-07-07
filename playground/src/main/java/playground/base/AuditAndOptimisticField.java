@@ -1,4 +1,4 @@
-package playground.hibernate;
+package playground.base;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -45,7 +45,7 @@ public abstract class AuditAndOptimisticField {
     private Timestamp modifiedTs;
 
     @Version
-    @Column(name = "VERSION", nullable = false, precision = 18)
-    private BigDecimal version;
+    @Column(name = "VERSION", nullable = false)
+    private Long version;
 
 }

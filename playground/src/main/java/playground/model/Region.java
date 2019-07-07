@@ -2,7 +2,7 @@ package playground.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import playground.hibernate.AuditAndOptimisticField;
+import playground.base.AuditAndOptimisticField;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,7 +14,8 @@ import java.util.List;
  * Regions are like Asia, Europe, America etc, each region has many countries.
  */
 @Data
-@EqualsAndHashCode
+@EqualsAndHashCode(doNotUseGetters = true)
+@Entity
 @Table(name = "REGIONS")
 @NamedQuery(name = "Region.findAll", query = "SELECT r FROM Region r")
 public class Region extends AuditAndOptimisticField implements Serializable {
@@ -31,7 +32,7 @@ public class Region extends AuditAndOptimisticField implements Serializable {
 
     //bi-directional many-to-one association to Country
     //one region has many countries
-    @OneToMany(mappedBy = "region")
+    @OneToMany(mappedBy = "region", fetch = FetchType.LAZY)
     private List<Country> countries;
 
     public Country addCountry(Country country) {

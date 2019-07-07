@@ -2,11 +2,10 @@ package playground.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import playground.hibernate.AuditAndOptimisticField;
+import playground.base.AuditAndOptimisticField;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -15,7 +14,7 @@ import java.util.List;
  * Multiple countries belong to a region.
  */
 @Data
-@EqualsAndHashCode
+@EqualsAndHashCode(doNotUseGetters = true)
 @Entity
 @Table(name = "COUNTRIES")
 @NamedQuery(name = "Country.findAll", query = "SELECT c FROM Country c")
@@ -29,10 +28,6 @@ public class Country extends AuditAndOptimisticField implements Serializable {
 
     @Column(name = "COUNTRY_NAME", nullable = false, length = 40)
     private String countryName;
-
-    @Version
-    @Column(name = "VERSION", nullable = false, precision = 18)
-    private BigDecimal version;
 
     //bi-directional many-to-one association to Region
     //many countries belong to one  region

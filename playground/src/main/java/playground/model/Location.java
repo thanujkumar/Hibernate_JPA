@@ -2,7 +2,7 @@ package playground.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import playground.hibernate.AuditAndOptimisticField;
+import playground.base.AuditAndOptimisticField;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,7 +13,7 @@ import java.io.Serializable;
  * Multiple locations belong to a country
  */
 @Data
-@EqualsAndHashCode
+@EqualsAndHashCode(doNotUseGetters = true)
 @Entity
 @Table(name = "LOCATIONS")
 @NamedQuery(name = "Location.findAll", query = "SELECT l FROM Location l")

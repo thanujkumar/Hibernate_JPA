@@ -32,7 +32,7 @@
                  update = update existing schema,
                  create-drop = create during start and drop	when exit,
                  validate = validate the schema, makes no changes to database -->
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <!-- property name="hibernate.hbm2ddl.auto" value="validate"/ -->
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
             <!--https://vladmihalcea.com/hibernate-statistics-jmx/ -->

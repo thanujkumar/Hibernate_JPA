@@ -1,4 +1,4 @@
-package playground.hibernate;
+package playground.main;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -8,7 +8,7 @@ import org.hibernate.cfg.Configuration;
 import javax.persistence.EntityManager;
 import java.util.Properties;
 
-public class DBUtils {
+public class HibernateDBUtils {
 
     public SessionFactory getSessionFactory() {
         //property or xml or programmatic configuration

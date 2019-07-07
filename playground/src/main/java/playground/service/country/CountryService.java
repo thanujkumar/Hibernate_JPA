@@ -1,4 +1,4 @@
-package playground.service;
+package playground.service.country;
 
 import playground.model.Country;
 
