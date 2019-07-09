@@ -6,6 +6,7 @@ import playground.base.AuditAndOptimisticField;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * The persistent class for the LOCATIONS database table.
@@ -43,4 +44,22 @@ public class Location extends AuditAndOptimisticField implements Serializable {
     @JoinColumn(name = "COUNTRY_ID")
     private Country country;
 
+    //bi-directional many-to-one association to Warehouse
+    //There could be many wharehouses for a given location
+    @OneToMany(mappedBy = "location")//warehouse table will have location_id
+    private List<Warehouse> warehouses;
+
+    public Warehouse addWarehous(Warehouse warehouse) {
+        getWarehouses().add(warehouse);
+        warehouse.setLocation(this);
+
+        return warehouse;
+    }
+
+    public Warehouse removeWarehous(Warehouse warehouse) {
+        getWarehouses().remove(warehouse);
+        warehouse.setLocation(null);
+
+        return warehouse;
+    }
 }

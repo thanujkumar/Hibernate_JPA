@@ -38,7 +38,7 @@ public class Country extends AuditAndOptimisticField implements Serializable {
     //bi-directional many-to-one association to Location
     //One country has many locations
     @OneToMany(mappedBy = "country")
-    private List<Location> locations;
+    private List<Location> locations;//Location table will have country_id
 
     public Location addLocation(Location location) {
         getLocations().add(location);
