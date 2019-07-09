@@ -11,8 +11,8 @@ import java.io.Serializable;
  * <p>
  * Composite primary key (product_id, warehouse_id)
  */
-@Embeddable
 @Data
+@Embeddable
 public class InventoryPK implements Serializable {
 
     @Column(name = "PRODUCT_ID", insertable = false, updatable = false, unique = true, nullable = false, precision = 12)
