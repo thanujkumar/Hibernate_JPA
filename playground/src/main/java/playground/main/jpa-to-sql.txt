@@ -1,0 +1,4 @@
+SELECT name, credit_limit FROM customers;
+select c.name, c.creditLimit from  Customer c
+--------------------------------
+
