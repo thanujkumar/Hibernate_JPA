@@ -17,7 +17,7 @@ import java.util.List;
 @EqualsAndHashCode(doNotUseGetters = true)
 @Entity
 @Table(name = "COUNTRIES")
-@NamedQuery(name = "Country.findAll", query = "SELECT c FROM Country c")
+//@NamedQuery(name = "Country.findAll", query = "SELECT c FROM Country c")
 public class Country extends AuditAndOptimisticField implements Serializable {
 
     @Id

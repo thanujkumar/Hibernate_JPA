@@ -13,7 +13,7 @@ import java.util.List;
 @EqualsAndHashCode(doNotUseGetters = true)
 @Entity
 @Table(name = "EMPLOYEES")
-@NamedQuery(name = "Employee.findAll", query = "SELECT e FROM Employee e")
+//@NamedQuery(name = "Employee.findAll", query = "SELECT e FROM Employee e")
 public class Employee extends AuditAndOptimisticField implements Serializable {
 
     @Id

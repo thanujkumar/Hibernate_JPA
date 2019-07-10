@@ -17,7 +17,7 @@ import java.math.BigDecimal;
 @EqualsAndHashCode(doNotUseGetters = true)
 @Entity
 @Table(name = "ORDER_ITEMS")
-@NamedQuery(name = "OrderItem.findAll", query = "SELECT o FROM OrderItem o")
+//@NamedQuery(name = "OrderItem.findAll", query = "SELECT o FROM OrderItem o")
 public class OrderItem extends AuditAndOptimisticField implements Serializable {
 
     @EmbeddedId

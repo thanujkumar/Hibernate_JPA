@@ -12,7 +12,7 @@ import java.util.List;
 @EqualsAndHashCode(doNotUseGetters = true)
 @Entity
 @Table(name = "PRODUCT_CATEGORIES")
-@NamedQuery(name = "ProductCategory.findAll", query = "SELECT p FROM ProductCategory p")
+//@NamedQuery(name = "ProductCategory.findAll", query = "SELECT p FROM ProductCategory p")
 public class ProductCategory extends AuditAndOptimisticField implements Serializable {
 
     @Id

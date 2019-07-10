@@ -17,7 +17,7 @@ import java.util.List;
 @EqualsAndHashCode(doNotUseGetters = true)
 @Entity
 @Table(name = "REGIONS")
-@NamedQuery(name = "Region.findAll", query = "SELECT r FROM Region r")
+//@NamedQuery(name = "Region.findAll", query = "SELECT r FROM Region r")
 public class Region extends AuditAndOptimisticField implements Serializable {
 
 

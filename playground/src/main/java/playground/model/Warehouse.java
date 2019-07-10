@@ -17,7 +17,7 @@ import java.util.List;
 @EqualsAndHashCode(doNotUseGetters = true)
 @Entity
 @Table(name = "WAREHOUSES")
-@NamedQuery(name = "Warehouse.findAll", query = "SELECT w FROM Warehouse w")
+//@NamedQuery(name = "Warehouse.findAll", query = "SELECT w FROM Warehouse w")
 public class Warehouse extends AuditAndOptimisticField implements Serializable {
 
     @Id

@@ -13,7 +13,7 @@ import java.util.List;
 @EqualsAndHashCode(doNotUseGetters = true)
 @Entity
 @Table(name = "ORDERS")
-@NamedQuery(name = "Order.findAll", query = "SELECT o FROM Order o")
+//@NamedQuery(name = "Order.findAll", query = "SELECT o FROM Order o")
 public class Order extends AuditAndOptimisticField implements Serializable {
 
     @Id
@@ -25,6 +25,9 @@ public class Order extends AuditAndOptimisticField implements Serializable {
     @Temporal(TemporalType.DATE)
     @Column(name = "ORDER_DATE", nullable = false)
     private Date orderDate;
+
+    @Column(nullable=false, length=20)
+    private String status;
 
     //bi-directional many-to-one association to Customer
     @ManyToOne

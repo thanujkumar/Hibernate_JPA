@@ -1,13 +1,13 @@
 package playground.main;
 
+import lombok.Data;
 import playground.model.Country;
 import playground.model.Location;
 import playground.model.Region;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.*;
 
 //https://thoughts-on-java.org/jpql/
@@ -74,7 +74,24 @@ public class MainJPA_Region_JPQL {
         countryRegionList.stream().forEach(x -> {
             System.out.println("Region: [Region: " + ((Region) x[0]).getRegionName() + ", Country: " + (((Country) x[1]) != null ? ((Country) x[1]).getCountryName() : null) + "]");
         });
+
+//        Query query7 = entityMgr.createQuery("SELECT  o.customer.name as CUSTOMER, sum(oi.quantity*oi.unitPrice) as SALES_AMOUNT, EXTRACT(year from o.orderDate) as YEAR  FROM Order o INNER JOIN o.orderItems oi INNER JOIN o.customer c WHERE o.status='Shipped' GROUP BY o.customer.name, EXTRACT(year from o.orderDate)");
+//        List<Object[]> salesAmountList = query7.getResultList();
+//        salesAmountList.forEach(x -> {
+//            System.out.println(x[0] +"--"+x[1]+"---"+x[2]);
+//        });
+
+        Query query7 = entityMgr.createQuery("SELECT NEW playground.main.SalesInfo( o.customer.name, sum(oi.quantity*oi.unitPrice), EXTRACT(year from o.orderDate))  FROM Order o INNER JOIN o.orderItems oi INNER JOIN o.customer c WHERE o.status='Shipped' GROUP BY o.customer.name, EXTRACT(year from o.orderDate)");
+        List<SalesInfo> salesAmountList = query7.getResultList();
+        salesAmountList.forEach(x -> {
+            System.out.println(x.getCustomer() + "--" + x.getAmount() + "---" + x.getYear());
+        });
+
+
         entityMgr.close();
         entityMgrFactory.close();
+
     }
+
+
 }

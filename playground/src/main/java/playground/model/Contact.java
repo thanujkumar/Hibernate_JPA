@@ -11,7 +11,7 @@ import java.io.Serializable;
 @EqualsAndHashCode(doNotUseGetters = true)
 @Entity
 @Table(name = "CONTACTS")
-@NamedQuery(name = "Contact.findAll", query = "SELECT c FROM Contact c")
+//@NamedQuery(name = "Contact.findAll", query = "SELECT c FROM Contact c")
 public class Contact extends AuditAndOptimisticField implements Serializable {
 
     @Id

@@ -1,4 +1,14 @@
 SELECT name, credit_limit FROM customers;
-select c.name, c.creditLimit from  Customer c
+select c.name, c.creditLimit from  Customer c;
 --------------------------------
 
+SELECT   name AS customer,  SUM( quantity * unit_price ) sales_amount,    EXTRACT(YEAR  FROM order_date) YEAR
+FROM orders
+INNER JOIN order_items  USING(order_id)
+INNER JOIN customers    USING(customer_id)
+WHERE  status = 'Shipped'
+GROUP BY name, EXTRACT(YEAR FROM order_date);
+
+SELECT  o.customer.name as CUSTOMER, sum(oi.quantity*oi.unitPrice) as SALES_AMOUNT, EXTRACT(year from o.orderDate) as YEAR
+FROM Order o INNER JOIN o.orderItems oi INNER JOIN o.customer c WHERE o.status='Shipped'
+GROUP BY o.customer.name, EXTRACT(year from o.orderDate);
