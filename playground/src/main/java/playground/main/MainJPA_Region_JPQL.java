@@ -68,10 +68,12 @@ public class MainJPA_Region_JPQL {
         //Opposite - "select c, r FROM Country c LEFT JOIN c.region r
         //select r, c FROM Region r LEFT JOIN r.countries r
         // Oracle sql = select r.*, c.* from regions r LEFT JOIN countries c ON c.region_id = r.region_id
-        //TODO - Not working due to location object
         Query query6 = entityMgr.createQuery("select r, c FROM Region r LEFT JOIN r.countries c ");
-        List<Object[]> countryRegionList = query5.getResultList();
+        List<Object[]> countryRegionList = query6.getResultList();
 
+        countryRegionList.stream().forEach(x -> {
+            System.out.println("Region: [Region: " + ((Region) x[0]).getRegionName() + ", Country: " + (((Country) x[1]) != null ? ((Country) x[1]).getCountryName() : null) + "]");
+        });
         entityMgr.close();
         entityMgrFactory.close();
     }

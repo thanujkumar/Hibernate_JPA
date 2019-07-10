@@ -7,7 +7,7 @@
         <class>playground.model.Contact</class>
         <class>playground.model.Country</class>
         <class>playground.model.Location</class>
-        <!-- class>playground.model.Customer</class>
+        <class>playground.model.Customer</class>
         <class>playground.model.Employee</class>
         <class>playground.model.Inventory</class>
         <class>playground.model.InventoryPK</class>
@@ -17,7 +17,7 @@
         <class>playground.model.Product</class>
         <class>playground.model.ProductCategory</class>
         <class>playground.model.Region</class>
-        <class>playground.model.Warehous</class -->
+        <class>playground.model.Warehouse</class>
 
 
         <properties>
@@ -32,7 +32,7 @@
                  update = update existing schema,
                  create-drop = create during start and drop	when exit,
                  validate = validate the schema, makes no changes to database -->
-            <property name="hibernate.hbm2ddl.auto" value="validate"/>
+            <!-- property name="hibernate.hbm2ddl.auto" value="validate"/ -->
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
             <!--https://vladmihalcea.com/hibernate-statistics-jmx/ -->
