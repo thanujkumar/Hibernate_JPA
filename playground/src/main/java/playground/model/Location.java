@@ -40,7 +40,7 @@ public class Location extends AuditAndOptimisticField implements Serializable {
 
     //bi-directional many-to-one association to Country
     //Many locations belongs to one country
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)//ManyToOne default JPA fetch is Eager
     @JoinColumn(name = "COUNTRY_ID")
     private Country country;
 

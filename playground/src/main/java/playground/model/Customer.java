@@ -35,11 +35,11 @@ public class Customer extends AuditAndOptimisticField implements Serializable {
     private BigDecimal creditLimit;
 
     //bi-directional many-to-one association to Contact
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer")//OneToMany default JPA fetch is Lazy
     private List<Contact> contacts;
 
     //bi-directional many-to-one association to Order
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer")//OneToMany default JPA fetch is Lazy
     private List<Order> orders;
 
     public Contact addContact(Contact contact) {

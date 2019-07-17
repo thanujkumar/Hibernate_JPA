@@ -37,7 +37,7 @@
             <property name="hibernate.format_sql" value="true"/>
             <!--https://vladmihalcea.com/hibernate-statistics-jmx/ -->
             <property name="hibernate.generate_statistics" value="true"/>
-            <property name="hibernate.jmx.enabled" value="true"/>
+            <!-- property name="hibernate.jmx.enabled" value="true"/ -->
             <!--https://vladmihalcea.com/hibernate-query-fail-on-pagination-over-collection-fetch/ -->
             <property name="hibernate.query.fail_on_pagination_over_collection_fetch" value="true"/>
         </properties>

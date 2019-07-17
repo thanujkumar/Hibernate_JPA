@@ -27,12 +27,12 @@ public class Inventory extends AuditAndOptimisticField implements Serializable {
     private long quantity;
 
     //bi-directional many-to-one association to warehouse
-    @ManyToOne //Many inventories belongs to warehouse
+    @ManyToOne(fetch = FetchType.LAZY) //Many inventories belongs to warehouse ////ManyToOne default JPA fetch is Eager
     @JoinColumn(name = "WAREHOUSE_ID", nullable = false, insertable = false, updatable = false)
     private Warehouse warehouse;
 
     //bi-directional many-to-one association to Product
-    @ManyToOne//Many products belong to inventory
+    @ManyToOne(fetch = FetchType.LAZY)//Many products belong to inventory
     @JoinColumn(name = "PRODUCT_ID", nullable = false, insertable = false, updatable = false)
     private Product product;
 }

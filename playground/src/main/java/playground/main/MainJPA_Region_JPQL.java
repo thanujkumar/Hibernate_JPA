@@ -1,6 +1,11 @@
 package playground.main;
 
+import ch.qos.logback.classic.Logger;
+import ch.qos.logback.classic.LoggerContext;
+import ch.qos.logback.classic.encoder.PatternLayoutEncoder;
+import ch.qos.logback.core.ConsoleAppender;
 import lombok.Data;
+import org.slf4j.LoggerFactory;
 import playground.model.Country;
 import playground.model.Location;
 import playground.model.Region;
@@ -18,7 +23,7 @@ import java.util.*;
  * <p>
  * https://thoughts-on-java.org/how-to-join-unrelated-entities/
  */
-public class MainJPA_Region_JPQL {
+public class MainJPA_Region_JPQL extends Logging {
 
     public static void main(String[] args) {
         EntityManagerFactory entityMgrFactory = Persistence.createEntityManagerFactory("PLAYGROUND");

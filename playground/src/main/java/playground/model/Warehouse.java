@@ -30,7 +30,7 @@ public class Warehouse extends AuditAndOptimisticField implements Serializable {
     private String warehouseName;
 
     //bi-directional many-to-one association to Location
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "LOCATION_ID")
     private Location location;
 

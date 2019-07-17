@@ -43,7 +43,7 @@ public class Product extends AuditAndOptimisticField implements Serializable {
     private List<OrderItem> orderItems;
 
     //bi-directional many-to-one association to ProductCategory
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CATEGORY_ID", nullable = false)
     private ProductCategory productCategory;
 

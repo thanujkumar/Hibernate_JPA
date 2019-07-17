@@ -42,7 +42,7 @@ public class Employee extends AuditAndOptimisticField implements Serializable {
     private String jobTitle;
 
     //bi-directional many-to-one association to Employee
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)//ManyToOne default JPA fetch is Eager
     @JoinColumn(name = "MANAGER_ID")
     private Employee employee;
 

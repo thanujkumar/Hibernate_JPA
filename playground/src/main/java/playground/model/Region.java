@@ -32,7 +32,7 @@ public class Region extends AuditAndOptimisticField implements Serializable {
 
     //bi-directional many-to-one association to Country
     //one region has many countries
-    @OneToMany(mappedBy = "region", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "region")
     private List<Country> countries;//Country table will have region_id
 
     public Country addCountry(Country country) {

@@ -30,12 +30,12 @@ public class Order extends AuditAndOptimisticField implements Serializable {
     private String status;
 
     //bi-directional many-to-one association to Customer
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CUSTOMER_ID", nullable = false)
     private Customer customer;
 
     //bi-directional many-to-one association to Employee
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "SALESMAN_ID")
     private Employee employee;
 

@@ -31,13 +31,13 @@ public class Country extends AuditAndOptimisticField implements Serializable {
 
     //bi-directional many-to-one association to Region
     //many countries belong to one  region
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)////ManyToOne default JPA fetch is eager
     @JoinColumn(name = "REGION_ID")
     private Region region;
 
     //bi-directional many-to-one association to Location
     //One country has many locations
-    @OneToMany(mappedBy = "country")
+    @OneToMany(mappedBy = "country") ////OneToMany default JPA fetch is Lazy
     private List<Location> locations;//Location table will have country_id
 
     public Location addLocation(Location location) {

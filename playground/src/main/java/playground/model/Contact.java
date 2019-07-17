@@ -33,7 +33,7 @@ public class Contact extends AuditAndOptimisticField implements Serializable {
     private String phone;
 
     //bi-directional many-to-one association to Customer
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY) //ManyToOne default JPA fetch is eager
     @JoinColumn(name = "CUSTOMER_ID")
     private Customer customer;
 }

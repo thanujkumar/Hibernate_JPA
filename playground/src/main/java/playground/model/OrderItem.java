@@ -30,12 +30,12 @@ public class OrderItem extends AuditAndOptimisticField implements Serializable {
     private BigDecimal unitPrice;
 
     //bi-directional many-to-one association to Order
-    @ManyToOne //Many items are part of order
+    @ManyToOne(fetch = FetchType.LAZY) //Many items are part of order
     @JoinColumn(name = "ORDER_ID", nullable = false, insertable = false, updatable = false)
     private Order order;
 
     //bi-directional many-to-one association to Product
-    @ManyToOne //Many products can exits as part of Order, her Product is orderItem
+    @ManyToOne(fetch = FetchType.LAZY) //Many products can exits as part of Order, her Product is orderItem
     @JoinColumn(name = "PRODUCT_ID", nullable = false)
     private Product product;
 }
