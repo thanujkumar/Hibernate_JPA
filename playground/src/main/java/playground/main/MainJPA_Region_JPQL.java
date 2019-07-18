@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import playground.model.Country;
 import playground.model.Location;
 import playground.model.Region;
+import playground.model.Region_;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -79,6 +80,13 @@ public class MainJPA_Region_JPQL extends Logging {
         countryRegionList.stream().forEach(x -> {
             System.out.println("Region: [Region: " + ((Region) x[0]).getRegionName() + ", Country: " + (((Country) x[1]) != null ? ((Country) x[1]).getCountryName() : null) + "]");
         });
+        //Using Tuples for above query
+        query6 = entityMgr.createQuery("select r, c FROM Region r LEFT JOIN r.countries c ", Tuple.class);
+        List<Tuple> countryRegionListTuple = query6.getResultList();
+        for (Tuple t :  countryRegionListTuple ) {
+            System.out.println(t);
+        }
+
 
 //        Query query7 = entityMgr.createQuery("SELECT  o.customer.name as CUSTOMER, sum(oi.quantity*oi.unitPrice) as SALES_AMOUNT, EXTRACT(year from o.orderDate) as YEAR  FROM Order o INNER JOIN o.orderItems oi INNER JOIN o.customer c WHERE o.status='Shipped' GROUP BY o.customer.name, EXTRACT(year from o.orderDate)");
 //        List<Object[]> salesAmountList = query7.getResultList();

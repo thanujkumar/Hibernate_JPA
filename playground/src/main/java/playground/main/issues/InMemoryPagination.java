@@ -1,5 +1,6 @@
 package playground.main.issues;
 
+import org.hibernate.graph.GraphSemantic;
 import org.hibernate.jpa.QueryHints;
 import playground.main.Logging;
 import playground.model.Country;
@@ -9,9 +10,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.QueryHint;
+import java.io.BufferedReader;
 import java.util.List;
 
 /**
+ * https://thoughts-on-java.org/common-hibernate-mistakes-cripple-performance/
  * https://vladmihalcea.com/fix-hibernate-hhh000104-entity-fetch-pagination-warning-message/
  * https://vladmihalcea.com/fluent-api-entity-building-with-jpa-and-hibernate/
  * https://vladmihalcea.com/jpa-hibernate-query-hints/
@@ -25,13 +28,14 @@ public class InMemoryPagination extends Logging {
         EntityManager entityMgr = entityMgrFactory.createEntityManager();
 
         //To avoid below in-memory pagination two queries are required as below
-        List<Long> regionIds = entityMgr.createQuery("select r.regionId from Region r")
+        List<Long> regionIds =  entityMgr.createQuery("select r.regionId from Region r")
                 .setMaxResults(2).setFirstResult(3).getResultList();
         for (long rid : regionIds) {
             System.out.println("Region Id: " + rid);
         }
         List<Region> regionList = entityMgr.createQuery("select DISTINCT r from Region r JOIN FETCH r.countries c WHERE r.regionId in (:regionIds)")
                 .setParameter("regionIds", regionIds).setHint("hibernate.query.passDistinctThrough", false).getResultList();
+
         for (Region r : regionList) {
             System.out.println(r.getRegionName());
             List<Country> countryList = r.getCountries();
