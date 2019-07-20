@@ -10,10 +10,12 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Data
-@NoArgsConstructor
 @EqualsAndHashCode
 @Table(name = "COMMENTS_CHILD2")
 public class CommentChildP extends AuditModel {
+
+    public CommentChildP() {
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,4 +32,5 @@ public class CommentChildP extends AuditModel {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "post_id")
     private PostParentC post;
-}
+
+ }

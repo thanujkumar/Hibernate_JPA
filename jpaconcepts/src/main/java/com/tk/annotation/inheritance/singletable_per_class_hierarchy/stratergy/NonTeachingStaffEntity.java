@@ -11,7 +11,6 @@ import javax.persistence.Entity;
 @DiscriminatorValue(value = "NS")
 @Data
 @EqualsAndHashCode(callSuper=true)
-@NoArgsConstructor
 public class NonTeachingStaffEntity extends StaffEntity {
 
 	private String areaExpertise;

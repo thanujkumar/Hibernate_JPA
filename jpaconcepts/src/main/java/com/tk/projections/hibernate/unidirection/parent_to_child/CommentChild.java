@@ -1,4 +1,4 @@
-package com.tk.projections.hibernate.unidirection.wrongmapping.fix;
+package com.tk.projections.hibernate.unidirection.parent_to_child;
 
 import com.tk.projections.hibernate.bidirectional.AuditModel;
 import lombok.Data;
@@ -7,12 +7,14 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-//This would create a joining table which looks like many to many
+
 @Entity
 @Data
-@NoArgsConstructor
-@Table(name = "COMMENTS_FIXED")
-public class CommentFixed extends AuditModel {
+@Table(name = "COMMENTS_CHILD")
+public class CommentChild extends AuditModel {
+
+    public CommentChild() {
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +24,7 @@ public class CommentFixed extends AuditModel {
     @Lob
     private String text;
 
-    public CommentFixed(String _text) {
+    public CommentChild(String _text) {
         text = _text;
     }
 

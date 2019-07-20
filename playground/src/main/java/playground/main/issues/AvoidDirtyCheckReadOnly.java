@@ -12,7 +12,8 @@ import javax.persistence.Persistence;
 import javax.transaction.Transaction;
 import java.util.List;
 
-//https://thoughts-on-java.org/11-jpa-hibernate-query-hints-every-developer-know/
+//https://www.ibm.com/developerworks/java/library/j-ts1/index.html
+// https://thoughts-on-java.org/11-jpa-hibernate-query-hints-every-developer-know/
 //https://vladmihalcea.com/how-does-the-auto-flush-work-in-jpa-and-hibernate/
 
 /**
