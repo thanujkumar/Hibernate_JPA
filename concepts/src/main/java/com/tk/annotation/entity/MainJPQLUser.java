@@ -1,12 +1,14 @@
 package com.tk.annotation.entity;
 
+import com.tk.log.Logging;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import java.util.List;
 
-public class MainJPQLUser {
+public class MainJPQLUser extends Logging {
 
 	public static void main(String[] args) {
 		EntityManagerFactory entityMgrFactory = Persistence.createEntityManagerFactory("LearnJPA");

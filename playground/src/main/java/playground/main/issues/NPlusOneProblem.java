@@ -22,6 +22,7 @@ public class NPlusOneProblem extends Logging {
     public static void main(String[] args) {
         EntityManagerFactory entityMgrFactory = Persistence.createEntityManagerFactory("PLAYGROUND");
         EntityManager entityMgr = entityMgrFactory.createEntityManager();
+       //No transction used
 
         List<Region> regionList = entityMgr.createQuery("select r from Region r").getResultList();
 

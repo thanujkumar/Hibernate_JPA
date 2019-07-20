@@ -1,5 +1,6 @@
 package com.tk.annotation.optimistic_locking;
 
+import com.tk.log.Logging;
 import org.hibernate.procedure.ProcedureOutputs;
 
 import javax.persistence.EntityManager;
@@ -8,7 +9,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import java.util.stream.IntStream;
 
-public class MainCreateProducts {
+public class MainCreateProducts extends Logging {
 
     public static void main(String[] args) {
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("LearnJPA");

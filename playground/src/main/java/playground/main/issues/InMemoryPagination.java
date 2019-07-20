@@ -27,6 +27,8 @@ public class InMemoryPagination extends Logging {
         EntityManagerFactory entityMgrFactory = Persistence.createEntityManagerFactory("PLAYGROUND");
         EntityManager entityMgr = entityMgrFactory.createEntityManager();
 
+        entityMgr.getTransaction().begin();
+
         //To avoid below in-memory pagination two queries are required as below
         List<Long> regionIds =  entityMgr.createQuery("select r.regionId from Region r")
                 .setMaxResults(2).setFirstResult(3).getResultList();
@@ -55,6 +57,8 @@ public class InMemoryPagination extends Logging {
                 System.out.println("\t" + c.getCountryName());
             }
         }
+
+        entityMgr.getTransaction().commit();
 
         entityMgr.close();
         entityMgrFactory.close();

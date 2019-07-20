@@ -1,9 +1,11 @@
 package com.tk.annotation.inheritance.joinedtable.stratergy2;
 
+import com.tk.log.Logging;
+
 import javax.persistence.*;
 import java.util.List;
 
-public class MainVehicleRead {
+public class MainVehicleRead extends Logging {
     public static void main(String[] args) {
         EntityManagerFactory entityMgrFactory = Persistence.createEntityManagerFactory("LearnJPA");
         EntityManager entityMgr = entityMgrFactory.createEntityManager();

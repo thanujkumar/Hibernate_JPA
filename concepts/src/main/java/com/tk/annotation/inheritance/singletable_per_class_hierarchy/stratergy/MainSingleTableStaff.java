@@ -1,10 +1,12 @@
 package com.tk.annotation.inheritance.singletable_per_class_hierarchy.stratergy;
 
+import com.tk.log.Logging;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class MainSingleTableStaff {
+public class MainSingleTableStaff extends Logging {
 
 	public static void main(String[] args) {
 		

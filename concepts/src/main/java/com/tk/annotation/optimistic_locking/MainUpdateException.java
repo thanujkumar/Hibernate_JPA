@@ -1,12 +1,14 @@
 package com.tk.annotation.optimistic_locking;
 
+import com.tk.log.Logging;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 
-public class MainUpdateException {
+public class MainUpdateException extends Logging {
 
     private static CountDownLatch countDownLatch = new CountDownLatch(2); //2 threads wait to sync and continue for
     // update
