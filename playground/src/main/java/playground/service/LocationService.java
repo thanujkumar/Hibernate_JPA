@@ -1,4 +1,4 @@
-package playground.service.location;
+package playground.service;
 
 public interface LocationService {
 }

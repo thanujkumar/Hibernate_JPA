@@ -57,6 +57,21 @@ public class Logging {
         app6.setLevel(ch.qos.logback.classic.Level.TRACE);
         app6.addAppender(logConsoleAppender);
 
+        Logger app7 = lc.getLogger("com.arjuna");
+        app7.setAdditive(false);
+        app7.setLevel(ch.qos.logback.classic.Level.TRACE);
+        app7.addAppender(logConsoleAppender);
+
+        Logger app8 = lc.getLogger("oracle.ucp");
+        app8.setAdditive(false);
+        app8.setLevel(ch.qos.logback.classic.Level.TRACE);
+        app8.addAppender(logConsoleAppender);
+
+        Logger app9 = lc.getLogger("org.springframework");
+        app9.setAdditive(false);
+        app9.setLevel(ch.qos.logback.classic.Level.TRACE);
+        app9.addAppender(logConsoleAppender);
+
         lc.getLogger(org.slf4j.Logger.ROOT_LOGGER_NAME).setLevel(ch.qos.logback.classic.Level.INFO);
 
     }
