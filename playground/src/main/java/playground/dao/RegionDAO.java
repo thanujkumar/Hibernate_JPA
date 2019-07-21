@@ -18,7 +18,7 @@ public class RegionDAO {
 
     public List<Region> findAll() {
         System.out.println("RegionDAO.findAll Hibernate Flush Mode : "+ entityManager.unwrap(Session.class).getHibernateFlushMode());
-        System.out.println("RegionDAO.findAll IsReadOnly : "+ entityManager.unwrap(Session.class).isDefaultReadOnly());
+        System.out.println("RegionDAO.findAll Session IsReadOnly : "+ entityManager.unwrap(Session.class).isDefaultReadOnly());
         System.out.println("RegionDAO.findAll TxSync isSyncActive : "+ TransactionSynchronizationManager.isSynchronizationActive());
         System.out.println("RegionDAO.findAll TxSync isReadOnly : "+ TransactionSynchronizationManager.isCurrentTransactionReadOnly());
         System.out.println("RegionDAO.findAll TxSync isTxActive : "+ TransactionSynchronizationManager.isActualTransactionActive());
@@ -27,7 +27,7 @@ public class RegionDAO {
 
     public void save(Region region) {
         System.out.println("RegionDAO.save Hibernate Flush Mode : "+ entityManager.unwrap(Session.class).getHibernateFlushMode());
-        System.out.println("RegionDAO.save IsReadOnly : "+ entityManager.unwrap(Session.class).isDefaultReadOnly());
+        System.out.println("RegionDAO.save Session IsReadOnly : "+ entityManager.unwrap(Session.class).isDefaultReadOnly());
         System.out.println("RegionDAO.save TxSync isSyncActive : "+ TransactionSynchronizationManager.isSynchronizationActive());
         System.out.println("RegionDAO.save TxSync isReadOnly : "+ TransactionSynchronizationManager.isCurrentTransactionReadOnly());
         System.out.println("RegionDAO.save TxSync isTxActive : "+ TransactionSynchronizationManager.isActualTransactionActive());

@@ -12,7 +12,7 @@ import java.util.List;
 public class MainTestConfig extends Logging {
     private static AbstractApplicationContext context;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
         context = new AnnotationConfigApplicationContext(JavaConfigGlobalTx.class);
 
         RegionService regionService = context.getBean("regionService", RegionService.class);
@@ -24,6 +24,7 @@ public class MainTestConfig extends Logging {
         Region region = new Region();
         region.setRegionName("TestRegion");
         region.setCreatedBy("Thanuj");
+        region.setVersion(0L);
 
         regionService.insert(region);
 

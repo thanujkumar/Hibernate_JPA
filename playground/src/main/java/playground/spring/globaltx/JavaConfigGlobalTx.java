@@ -14,7 +14,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.orm.jpa.persistenceunit.DefaultPersistenceUnitManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.jta.JtaTransactionManager;
@@ -61,9 +60,8 @@ public class JavaConfigGlobalTx implements DestructionAwareBeanPostProcessor {
     @DependsOn("dataSource")
     public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean() throws SQLException {
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
-        entityManagerFactoryBean.setPersistenceUnitManager(defaultPersistenceUnitManager()); //If you need to load specific xml and then package scan to be disabled
-       // entityManagerFactoryBean.setPersistenceUnitName(PERSISTENCE_UNIT_NAME);
-        //entityManagerFactoryBean.setPackagesToScan("playground.model"); //where all entities exits
+        entityManagerFactoryBean.setPersistenceUnitName(PERSISTENCE_UNIT_NAME);
+        entityManagerFactoryBean.setPackagesToScan("playground.model"); //where all entities exits
         entityManagerFactoryBean.setJtaDataSource(dataSource()); //Need to set JTA source if need to be in transaction, else local transaction considered
         entityManagerFactoryBean.setJpaVendorAdapter(new org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter());
         entityManagerFactoryBean.setPersistenceProvider(new HibernatePersistenceProvider());
@@ -77,20 +75,40 @@ public class JavaConfigGlobalTx implements DestructionAwareBeanPostProcessor {
         return entityManagerFactoryBean;
     }
 
+
+    /**
+     * Normal loading persistence.xml
+     *
+     * @return
+     * @throws SQLException
+     */
+
+//    @Bean
+//    @DependsOn("dataSource")
+//    public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean() throws SQLException {
+//        LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
+//        entityManagerFactoryBean.setPersistenceXmlLocation("classpath*:META-INF/persistence.xml");
+//        entityManagerFactoryBean.setJtaDataSource(dataSource()); //Need to set JTA source if need to be in transaction, else local transaction considered
+//        entityManagerFactoryBean.setJpaVendorAdapter(new org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter());
+//        entityManagerFactoryBean.setPersistenceProvider(new HibernatePersistenceProvider());
+//        //Set all hibernate properties here as no persistence.xml is used (spring 3.1 and above)
+//        Properties jpaProp = new Properties();
+//        jpaProp.setProperty("hibernate.dialect", "org.hibernate.dialect.Oracle12cDialect");
+//        jpaProp.setProperty("hibernate.query.fail_on_pagination_over_collection_fetch", "true");
+//        jpaProp.setProperty("hibernate.format_sql", "true");
+//        jpaProp.setProperty("hibernate.generate_statistics", "true");
+//        entityManagerFactoryBean.setJpaProperties(jpaProp);
+//        return entityManagerFactoryBean;
+//    }
     @Bean
     public PlatformTransactionManager transactionManager() throws Exception {
         JtaTransactionManager transactionManager = new JtaTransactionManager();
-        transactionManager.setTransactionSynchronizationRegistry(new TransactionSynchronizationRegistryImple());
+        //transactionManager.setTransactionSynchronizationRegistry(new TransactionSynchronizationRegistryImple());
         transactionManager.setTransactionManager(new com.arjuna.ats.internal.jta.transaction.arjunacore.TransactionManagerImple());
         transactionManager.setUserTransaction(new com.arjuna.ats.internal.jta.transaction.arjunacore.UserTransactionImple());
         return transactionManager;
     }
 
-    public DefaultPersistenceUnitManager defaultPersistenceUnitManager() throws SQLException {
-        DefaultPersistenceUnitManager defaultPersistenceUnitManager = new DefaultPersistenceUnitManager();
-        defaultPersistenceUnitManager.setPersistenceXmlLocation("classpath*:META-INF/persistence-jta.xml");
-        return defaultPersistenceUnitManager;
-    }
 
     @Override
     public void postProcessBeforeDestruction(Object bean, String beanName) throws BeansException {
