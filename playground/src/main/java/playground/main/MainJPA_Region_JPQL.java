@@ -20,12 +20,29 @@ import playground.model.Region;
  * in the WHERE clause to the records with matching foreign and primary keys.
  * <p>
  * https://thoughts-on-java.org/how-to-join-unrelated-entities/
+ * <p>
+ * All database statements are executed within the context of a physical transaction, even when we don’t explicitly declare transaction boundaries (BEGIN/COMMIT/ROLLBACK).
+ * <p>
+ * If you don't declare transaction boundaries explicitly, then each statement will have to be executed in a separate transaction (autocommit mode [commit=true]).
+ * This may even lead to opening and closing one connection per statement unless your environment can deal with connection-per-thread binding.
+ * <p>
+ * Declaring a service as @Transactional will give you one connection for the whole transaction duration, and all statements will use that
+ * single isolation connection. This is way better than not using explicit transactions in the first place.
+ * <p>
+ * On large applications, you may have many concurrent requests, and reducing database connection acquisition request rate will definitely
+ * improve your overall application performance.
+ * <p>
+ * JPA doesn't enforce transactions on read operations. Only writes end up throwing a transaction required exception in case you
+ * forget to start a transactional context. Nevertheless, it's always better to declare transaction boundaries even for read-only
+ * transactions (in Spring @Transactional allows you to mark read-only transactions, which has a great performance benefit).
  */
 public class MainJPA_Region_JPQL extends Logging {
 
     public static void main(String[] args) {
         EntityManagerFactory entityMgrFactory = Persistence.createEntityManagerFactory("PLAYGROUND");
         EntityManager entityMgr = entityMgrFactory.createEntityManager();
+        //If no transaction then each statement will use one connection (so total 8, if transaction set only 1 connection)
+        entityMgr.getTransaction().begin();
 
         Query query = entityMgr.createQuery("select R  from Region R");
         List<Region> regionList = query.getResultList();
@@ -102,6 +119,7 @@ public class MainJPA_Region_JPQL extends Logging {
             System.out.println(x.getCustomer() + "--" + x.getAmount() + "---" + x.getYear());
         });
 
+        entityMgr.getTransaction().commit();
         entityMgr.close();
         entityMgrFactory.close();
 
