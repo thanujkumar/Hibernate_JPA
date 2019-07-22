@@ -67,6 +67,7 @@ public class JavaConfigGlobalTx implements DestructionAwareBeanPostProcessor {
         entityManagerFactoryBean.setPersistenceProvider(new HibernatePersistenceProvider());
         //Set all hibernate properties here as no persistence.xml is used (spring 3.1 and above)
         Properties jpaProp = new Properties();
+        jpaProp.setProperty("hibernate.hbm2ddl.auto","create");
         jpaProp.setProperty("hibernate.dialect", "org.hibernate.dialect.Oracle12cDialect");
         jpaProp.setProperty("hibernate.query.fail_on_pagination_over_collection_fetch", "true");
         //jpaProp.setProperty("hibernate.format_sql", "true");

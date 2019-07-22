@@ -24,7 +24,7 @@ public class Region extends AuditAndOptimisticField implements Serializable {
 
     @Id
     @SequenceGenerator(name = "REGIONS_SEQ_GENERATOR", sequenceName = "REGIONS_SEQ")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)//, generator = "REGIONS_SEQ_GENERATOR")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "REGIONS_SEQ_GENERATOR")
     @Column(name = "REGION_ID", unique = true, nullable = false)
     private long regionId;
 
