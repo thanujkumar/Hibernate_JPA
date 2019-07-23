@@ -52,7 +52,7 @@ public class Logging {
         app5.addAppender(logConsoleAppender);
 
 
-        Logger app6 = lc.getLogger("org.springframework.transaction.support");
+        Logger app6 = lc.getLogger("org.springframework.transaction");//org.springframework.transaction.support
         app6.setAdditive(false);
         app6.setLevel(ch.qos.logback.classic.Level.TRACE);
         app6.addAppender(logConsoleAppender);

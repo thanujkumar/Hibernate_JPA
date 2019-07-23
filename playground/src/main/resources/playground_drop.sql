@@ -20,3 +20,14 @@ DROP TABLE playground.customers;
 DROP TABLE playground.locations;
 DROP TABLE playground.countries;
 DROP TABLE playground.regions;
+
+drop sequence regions_seq;
+drop sequence countries_seq;
+drop sequence locations_seq;
+drop sequence customers_seq;
+drop sequence contacts_seq;
+drop sequence employees_seq;
+drop sequence warehouses_seq;
+drop sequence products_seq;
+drop sequence product_categories_seq;
+drop sequence orders_seq;

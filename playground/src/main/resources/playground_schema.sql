@@ -235,11 +235,15 @@ CREATE TABLE inventories
   INCREMENT BY 50 -- Matching JPA default cache
   CACHE 50;
 
+  select REGIONS_SEQ.nextval from dual;
+
   CREATE SEQUENCE COUNTRIES_SEQ
   MINVALUE 1
   START WITH 26
   INCREMENT BY 50 -- Matching JPA default cache
   CACHE 50;
+
+  select COUNTRIES_SEQ.nextval from dual;
 
   CREATE SEQUENCE LOCATIONS_SEQ
   MINVALUE 1
@@ -247,11 +251,15 @@ CREATE TABLE inventories
   INCREMENT BY 50 -- Matching JPA default cache
   CACHE 50;
 
+  select LOCATIONS_SEQ.nextval from dual;
+
   CREATE SEQUENCE CONTACTS_SEQ
   MINVALUE 1
   START WITH 320
   INCREMENT BY 50 -- Matching JPA default cache
   CACHE 50;
+
+  select CONTACTS_SEQ.nextval from dual;
 
   CREATE SEQUENCE CUSTOMERS_SEQ
   MINVALUE 1
@@ -259,11 +267,15 @@ CREATE TABLE inventories
   INCREMENT BY 50 -- Matching JPA default cache
   CACHE 50;
 
+ select CUSTOMERS_SEQ.nextval from dual;
+
   CREATE SEQUENCE EMPLOYEES_SEQ
   MINVALUE 1
   START WITH 108
   INCREMENT BY 50 -- Matching JPA default cache
   CACHE 50;
+
+ select EMPLOYEES_SEQ.nextval from dual;
 
   CREATE SEQUENCE ORDERS_SEQ
   MINVALUE 1
@@ -271,11 +283,15 @@ CREATE TABLE inventories
   INCREMENT BY 50 -- Matching JPA default cache
   CACHE 50;
 
+ select ORDERS_SEQ.nextval from dual;
+
   CREATE SEQUENCE PRODUCT_CATEGORIES_SEQ
   MINVALUE 1
   START WITH 6
   INCREMENT BY 50 -- Matching JPA default cache
   CACHE 50;
+
+ select PRODUCT_CATEGORIES_SEQ.nextval from dual;
 
   CREATE SEQUENCE PRODUCTS_SEQ
   MINVALUE 1
@@ -283,8 +299,12 @@ CREATE TABLE inventories
   INCREMENT BY 50 -- Matching JPA default cache
   CACHE 50;
 
+ select PRODUCTS_SEQ.nextval from dual;
+
   CREATE SEQUENCE WAREHOUSES_SEQ
   MINVALUE 1
   START WITH 10
   INCREMENT BY 50 -- Matching JPA default cache
   CACHE 50;
+
+ select WAREHOUSES_SEQ.nextval from dual;
