@@ -21,7 +21,7 @@ import java.util.List;
 public class Country extends AuditAndOptimisticField implements Serializable {
 
     @Id
-    @SequenceGenerator(name = "COUNTRIES_SEQ_GENERATOR", sequenceName = "COUNTRIES_SEQ")
+    @SequenceGenerator(name = "COUNTRIES_SEQ_GENERATOR", sequenceName = "COUNTRIES_SEQ", allocationSize = 50)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "COUNTRIES_SEQ_GENERATOR")
     @Column(name = "COUNTRY_ID", unique = true, nullable = false, length = 2)
     private String countryId;

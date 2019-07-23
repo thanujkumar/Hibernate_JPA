@@ -21,7 +21,7 @@ import java.util.List;
 public class Location extends AuditAndOptimisticField implements Serializable {
 
     @Id
-    @SequenceGenerator(name = "LOCATIONS_SEQ_GENERATOR", sequenceName = "LOCATIONS_SEQ")
+    @SequenceGenerator(name = "LOCATIONS_SEQ_GENERATOR", sequenceName = "LOCATIONS_SEQ", allocationSize = 50)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "LOCATIONS_SEQ_GENERATOR")
     @Column(name = "LOCATION_ID", unique = true, nullable = false)
     private long locationId;

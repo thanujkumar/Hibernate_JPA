@@ -17,7 +17,7 @@ import java.util.List;
 public class Order extends AuditAndOptimisticField implements Serializable {
 
     @Id
-    @SequenceGenerator(name = "ORDERS_SEQ_GENERATOR", sequenceName = "ORDERS_SEQ")
+    @SequenceGenerator(name = "ORDERS_SEQ_GENERATOR", sequenceName = "ORDERS_SEQ", allocationSize = 50)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ORDERS_SEQ_GENERATOR")
     @Column(name = "ORDER_ID", unique = true, nullable = false)
     private long orderId;

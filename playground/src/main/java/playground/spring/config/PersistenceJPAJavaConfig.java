@@ -1,0 +1,52 @@
+package playground.spring.config;
+
+import org.hibernate.jpa.HibernatePersistenceProvider;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import playground.spring.ucp.GlobalOracleConnectionPool;
+
+import javax.sql.DataSource;
+import java.sql.SQLException;
+
+//https://www.baeldung.com/transaction-configuration-with-jpa-and-spring
+
+@Configuration
+@EnableTransactionManagement
+@ComponentScan(basePackages = {"playground.model","playground.service", "playground.dao"})
+public class PersistenceJPAJavaConfig {
+
+    @Bean
+    public DataSource dataSource() throws SQLException {
+        return GlobalOracleConnectionPool.getPoolDatasource(GlobalOracleConnectionPool.ORA_URL);
+    }
+
+    @Bean
+    public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean() throws SQLException {
+        LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
+        entityManagerFactoryBean.setPersistenceUnitName("PLAYGROUND");
+        entityManagerFactoryBean.setDataSource(dataSource());
+        entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+        entityManagerFactoryBean.setPersistenceProvider(new HibernatePersistenceProvider());
+        return entityManagerFactoryBean;
+    }
+
+    @Bean
+    public PlatformTransactionManager transactionManager() throws SQLException {
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(entityManagerFactoryBean().getObject());
+        return  transactionManager;
+    }
+
+    @Bean
+    public PersistenceExceptionTranslationPostProcessor exceptionTranslation(){
+        return new PersistenceExceptionTranslationPostProcessor();
+    }
+}

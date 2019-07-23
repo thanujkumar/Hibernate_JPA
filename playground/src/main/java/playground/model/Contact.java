@@ -15,7 +15,7 @@ import java.io.Serializable;
 public class Contact extends AuditAndOptimisticField implements Serializable {
 
     @Id
-    @SequenceGenerator(name = "CONTACTS_SEQ_GENERATOR", sequenceName = "CONTACTS_SEQ")
+    @SequenceGenerator(name = "CONTACTS_SEQ_GENERATOR", sequenceName = "CONTACTS_SEQ", allocationSize = 50)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CONTACTS_SEQ_GENERATOR")
     @Column(name = "CONTACT_ID", unique = true, nullable = false)
     private long contactId;

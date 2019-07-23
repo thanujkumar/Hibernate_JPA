@@ -23,7 +23,7 @@ public class Region extends AuditAndOptimisticField implements Serializable {
     public static final String QUERY_ALL="Region.findAll";
 
     @Id
-    @SequenceGenerator(name = "REGIONS_SEQ_GENERATOR", sequenceName = "REGIONS_SEQ")
+    @SequenceGenerator(name = "REGIONS_SEQ_GENERATOR", sequenceName = "REGIONS_SEQ", allocationSize = 50)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "REGIONS_SEQ_GENERATOR")
     @Column(name = "REGION_ID", unique = true, nullable = false)
     private long regionId;

@@ -17,7 +17,7 @@ import java.util.List;
 public class Customer extends AuditAndOptimisticField implements Serializable {
 
     @Id
-    @SequenceGenerator(name = "CUSTOMERS_SEQ_GENERATOR", sequenceName = "CUSTOMERS_SEQ")
+    @SequenceGenerator(name = "CUSTOMERS_SEQ_GENERATOR", sequenceName = "CUSTOMERS_SEQ", allocationSize = 50)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CUSTOMERS_SEQ_GENERATOR")
     @Column(name = "CUSTOMER_ID", unique = true, nullable = false)
     private long customerId;

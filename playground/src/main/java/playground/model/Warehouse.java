@@ -21,7 +21,7 @@ import java.util.List;
 public class Warehouse extends AuditAndOptimisticField implements Serializable {
 
     @Id
-    @SequenceGenerator(name = "WAREHOUSES_SEQ_GENERATOR", sequenceName = "WAREHOUSES_SEQ")
+    @SequenceGenerator(name = "WAREHOUSES_SEQ_GENERATOR", sequenceName = "WAREHOUSES_SEQ", allocationSize = 50)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "WAREHOUSES_SEQ_GENERATOR")
     @Column(name = "WAREHOUSE_ID", unique = true, nullable = false)
     private long warehouseId;

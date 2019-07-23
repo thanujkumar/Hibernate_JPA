@@ -26,8 +26,8 @@ public class GlobalOracleConnectionPool {
     public static DataSource getPoolDatasource(String url) throws SQLException {
         PoolDataSource dataSource = PoolDataSourceFactory.getPoolDataSource();
         dataSource.setURL(url);
-        dataSource.setConnectionFactoryClassName("oracle.jdbc.datasource.OracleDataSource");
-        dataSource.setUser(ORA_PASSWORD);
+        dataSource.setConnectionFactoryClassName("oracle.jdbc.pool.OracleDataSource");
+        dataSource.setUser(ORA_USER);
         dataSource.setPassword(ORA_PASSWORD);
         dataSource.setLoginTimeout(10);
         dataSource.setMinPoolSize(0);
@@ -43,7 +43,7 @@ public class GlobalOracleConnectionPool {
         PoolXADataSource dataSource = PoolDataSourceFactory.getPoolXADataSource();
         dataSource.setURL(url);
         dataSource.setConnectionFactoryClassName("oracle.jdbc.xa.client.OracleXADataSource");
-        dataSource.setUser(ORA_PASSWORD);
+        dataSource.setUser(ORA_USER);
         dataSource.setPassword(ORA_PASSWORD);
         dataSource.setLoginTimeout(10);
         dataSource.setMinPoolSize(0);

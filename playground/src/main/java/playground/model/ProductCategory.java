@@ -16,7 +16,7 @@ import java.util.List;
 public class ProductCategory extends AuditAndOptimisticField implements Serializable {
 
     @Id
-    @SequenceGenerator(name = "PRODUCT_CATEGORIES_SEQ_GENERATOR", sequenceName = "PRODUCT_CATEGORIES_SEQ")
+    @SequenceGenerator(name = "PRODUCT_CATEGORIES_SEQ_GENERATOR", sequenceName = "PRODUCT_CATEGORIES_SEQ", allocationSize = 50)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PRODUCT_CATEGORIES_SEQ_GENERATOR")
     @Column(name = "CATEGORY_ID", unique = true, nullable = false)
     private long categoryId;
