@@ -19,7 +19,8 @@ public class UsingBatchingStatements {
         //https://docs.oracle.com/en/database/oracle/oracle-database/18/jjdbc/performance-extensions.html#GUID-24D35E13-A9C0-43F3-8F8B-870AD1BF5339
         DataSource dataSource = context.getBean("dataSource", DataSource.class);
         Connection con = dataSource.getConnection();
-        PreparedStatement preparedStatement = con.prepareStatement("insert into REGIONS(REGION_ID, REGION_NAME, CREATED_BY, CREATED_TS, VERSION) values (REGIONS_SEQ.nextval,?,?,?,?)");
+        PreparedStatement preparedStatement = con.prepareStatement("insert into REGIONS(REGION_ID, REGION_NAME, CREATED_BY, CREATED_TS, VERSION)" +
+                " values (REGIONS_SEQ.nextval,?,?,?,?)",new int[]{1} ); // OR new String[] {"REGION_ID"} to get generated keys
         preparedStatement.setString(1, "Test1");
         preparedStatement.setString(2,"e212731");
         preparedStatement.setTimestamp(3, new Timestamp(new Date().getTime()));
@@ -45,6 +46,11 @@ public class UsingBatchingStatements {
         preparedStatement.addBatch(); //Add to Batch
 
         int i[] = preparedStatement.executeBatch(); // executeBatch
+        ResultSet rs = preparedStatement.getGeneratedKeys();
+        while (rs.next()) {
+            System.out.println("Generated Key : "+ rs.getLong(1));
+        }
+
         System.out.println(Arrays.toString(i));
 
 //        Statement statement = con.createStatement();
