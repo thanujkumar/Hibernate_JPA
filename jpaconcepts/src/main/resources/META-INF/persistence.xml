@@ -8,8 +8,8 @@
 
         <class>com.tk.annotation.entity.User</class>
 
-        <!-- shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
-        <validation-mode>CALLBACK</validation-mode -->
+        <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
+        <validation-mode>AUTO</validation-mode>
 
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521/orcl"/>
