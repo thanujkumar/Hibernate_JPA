@@ -6,6 +6,9 @@ import playground.main.Logging;
 import playground.model.Region;
 import playground.service.RegionService;
 import playground.spring.config.PersistenceJPAJavaConfig;
+import playground.spring.paging.Paging;
+
+import java.util.List;
 
 //https://thoughts-on-java.org/5-common-hibernate-mistakes-that-cause-dozens-of-unexpected-queries/
 
@@ -40,6 +43,18 @@ public class MainBasicTestConfig  extends Logging {
         r.setCreatedBy("e212731");
         r.setVersion(0L);
         regionService.insert(r);
+
+        System.out.println(r.getRegionId());
+
+        //Change name and update
+        r.setRegionName("Test2");
+        r.setModifiedBy("e212731");
+        regionService.update(r);
+
+        //Paging
+        Paging paging = new Paging(0,2);
+        List<Region> regionList = regionService.findAll(paging);
+        System.out.println("Size : "+ regionList.size());
 
         context.close();//invokes UCP destroy method
     }

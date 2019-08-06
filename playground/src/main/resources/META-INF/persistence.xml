@@ -2,6 +2,7 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+    <!-- http://www.oracle.com/webfolder/technetwork/jsc/xml/ns/persistence/persistence_2_1.xsd -->
 
     <persistence-unit name="PLAYGROUND" transaction-type="RESOURCE_LOCAL">
         <class>playground.model.Contact</class>
@@ -18,7 +19,11 @@
         <class>playground.model.ProductCategory</class>
         <class>playground.model.Region</class>
         <class>playground.model.Warehouse</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
+        <validation-mode>AUTO</validation-mode>
 
+        <!-- Below properties are not required when loaded by Spring where it can be set in JavaConfig, required when used as standalone -->
 
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521/orcl"/>
@@ -28,6 +33,7 @@
 
             <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle12cDialect"/>
             <property name="hibernate.default_schema" value="PLAYGROUND"/>
+            <property name="hibernate.id.new_generator_mappings" value="true"/>
             <!-- create = create all the time when run,
                  update = update existing schema,
                  create-drop = create during start and drop	when exit,

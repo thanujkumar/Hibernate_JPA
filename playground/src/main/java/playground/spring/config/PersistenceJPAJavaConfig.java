@@ -5,9 +5,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaDialect;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -21,7 +21,7 @@ import java.sql.SQLException;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan(basePackages = {"playground.model","playground.service", "playground.dao","playground.utils"})
+@ComponentScan(basePackages = {"playground.model","playground.service", "playground.dao","playground.utils","playground.aspects","playground.ws"})
 public class PersistenceJPAJavaConfig {
 
     @Bean
@@ -43,6 +43,7 @@ public class PersistenceJPAJavaConfig {
     public PlatformTransactionManager transactionManager() throws SQLException {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactoryBean().getObject());
+        transactionManager.setJpaDialect(new HibernateJpaDialect());
         return  transactionManager;
     }
 
