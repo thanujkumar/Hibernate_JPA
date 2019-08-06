@@ -1,5 +1,6 @@
 package playground.spring.ucp;
 
+import oracle.jdbc.OracleConnection;
 import oracle.ucp.jdbc.PoolDataSource;
 import oracle.ucp.jdbc.PoolDataSourceFactory;
 import oracle.ucp.jdbc.PoolXADataSource;
@@ -7,6 +8,7 @@ import oracle.ucp.jdbc.PoolXADataSource;
 import javax.sql.DataSource;
 import javax.sql.XADataSource;
 import java.sql.SQLException;
+import java.util.Properties;
 
 /**
  * This class provides to create both XA and non-XA connection.
@@ -23,6 +25,13 @@ public class GlobalOracleConnectionPool {
     private static final String driverName = "oracle:";
     private static final String semicolon = ";";
 
+    private static Properties conProp = new Properties();
+     static  {
+         conProp.setProperty(OracleConnection.CONNECTION_PROPERTY_THIN_READ_TIMEOUT, "10000");
+         conProp.setProperty(OracleConnection.CONNECTION_PROPERTY_DEFAULT_ROW_PREFETCH, "20");
+         conProp.setProperty("v$session.program", "HIBERNATE_JPA2");
+     }
+
     public static DataSource getPoolDatasource(String url) throws SQLException {
         PoolDataSource dataSource = PoolDataSourceFactory.getPoolDataSource();
         dataSource.setURL(url);
@@ -35,6 +44,7 @@ public class GlobalOracleConnectionPool {
         dataSource.setInitialPoolSize(0);
         dataSource.setInactiveConnectionTimeout(300);//5min
         dataSource.setConnectionPoolName("PLAYGROUND_POOL");
+        dataSource.setConnectionProperties(conProp);
         return dataSource;
     }
 
@@ -51,6 +61,7 @@ public class GlobalOracleConnectionPool {
         dataSource.setInitialPoolSize(0);
         dataSource.setInactiveConnectionTimeout(300);//5min
         dataSource.setConnectionPoolName("PLAYGROUND_XA_POOL");
+        dataSource.setConnectionProperties(conProp);
         return dataSource;
     }
 

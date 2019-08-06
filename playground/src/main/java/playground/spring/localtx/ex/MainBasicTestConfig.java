@@ -10,7 +10,7 @@ import playground.spring.config.PersistenceJPAJavaConfig;
 //https://thoughts-on-java.org/5-common-hibernate-mistakes-that-cause-dozens-of-unexpected-queries/
 
 //TODO - Read below link
-//https://www.ibm.com/developerworks/java/library/j-ts2/index.html
+//https://www.ibm.com/developerworks/java/library/j-ts2x`/index.html
 
 /**
  * Transaction Models
