@@ -25,7 +25,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan(basePackages = {"playground.model","playground.service", "playground.dao","playground.utils"})
+@ComponentScan(basePackages = {"playground.model","playground.service", "playground.dao","playground.utils","playground.aspects","playground.ws"})
 public class NarayanaTxJpaJavaConfig {
 
     public DataSource dataSource() throws SQLException {
