@@ -23,10 +23,10 @@ public class Logging {
         logConsoleAppender.setEncoder(ple);
         logConsoleAppender.start();
 
-        Logger app1 = lc.getLogger("org.hibernate.SQL");
-        app1.setAdditive(false);
-        app1.setLevel(ch.qos.logback.classic.Level.DEBUG);
-        app1.addAppender(logConsoleAppender);
+//        Logger app1 = lc.getLogger("org.hibernate.SQL");
+//        app1.setAdditive(false);
+//        app1.setLevel(ch.qos.logback.classic.Level.DEBUG);
+//        app1.addAppender(logConsoleAppender);
 
         //Query bind parameters
 //        Logger app2 = lc.getLogger("org.hibernate.type");
@@ -46,10 +46,10 @@ public class Logging {
         app4.addAppender(logConsoleAppender);
 
         //hibernate.generate_statistics will enable statistics collection and below logger prints it
-        Logger app5 = lc.getLogger("org.hibernate.engine.internal");
-        app5.setAdditive(false);
-        app5.setLevel(ch.qos.logback.classic.Level.INFO);
-        app5.addAppender(logConsoleAppender);
+//        Logger app5 = lc.getLogger("org.hibernate.engine.internal");
+//        app5.setAdditive(false);
+//        app5.setLevel(ch.qos.logback.classic.Level.INFO);
+//        app5.addAppender(logConsoleAppender);
 
 
         Logger app6 = lc.getLogger("org.springframework.transaction");//org.springframework.transaction.support
@@ -69,7 +69,7 @@ public class Logging {
 
         Logger app9 = lc.getLogger("org.springframework");
         app9.setAdditive(false);
-        app9.setLevel(ch.qos.logback.classic.Level.TRACE);
+        app9.setLevel(ch.qos.logback.classic.Level.WARN);
         app9.addAppender(logConsoleAppender);
 
         lc.getLogger(org.slf4j.Logger.ROOT_LOGGER_NAME).setLevel(ch.qos.logback.classic.Level.INFO);

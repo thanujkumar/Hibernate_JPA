@@ -2,18 +2,22 @@ package playground.high.performance.persistence.jpa_hibernate;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
-import playground.spring.config.PersistenceJPAJavaConfig;
+import playground.high.performance.config.HighPerformanceJPAJavaConfig;
+import playground.main.Logging;
 
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.Arrays;
 import java.util.Date;
 
-public class UsingBatchingStatements {
+/**
+ * Raw jdbc not using hibernate though library is loaded
+ */
+public class UsingJdbcBatchingStatements { //} extends Logging {
     static AbstractApplicationContext context;
 
     public static void main(String[] args) throws SQLException {
-        context = new AnnotationConfigApplicationContext(PersistenceJPAJavaConfig.class);
+        context = new AnnotationConfigApplicationContext(HighPerformanceJPAJavaConfig.class);
 
         //Getting raw connection - Oracle supports batching for PreparedStatements not for java.sql.Statement or java.sql.CallableStatement as required by jdbc spec
         //https://docs.oracle.com/en/database/oracle/oracle-database/18/jjdbc/performance-extensions.html#GUID-24D35E13-A9C0-43F3-8F8B-870AD1BF5339

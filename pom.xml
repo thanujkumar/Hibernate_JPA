@@ -36,6 +36,7 @@
 		<micrometer.version>1.2.0</micrometer.version>
 		<javax.inject.version>1</javax.inject.version>
 		<aspectj.version>1.8.6</aspectj.version>
+		<net.ttddyy.ds.proxy.version>1.5.1</net.ttddyy.ds.proxy.version>
 	</properties>
 
 	<dependencyManagement>
@@ -218,6 +219,13 @@
 				<groupId>io.micrometer</groupId>
 				<artifactId>micrometer-registry-jmx</artifactId>
 				<version>${micrometer.version}</version>
+			</dependency>
+
+			<!-- datasource proxy -->
+			<dependency>
+				<groupId>net.ttddyy</groupId>
+				<artifactId>datasource-proxy</artifactId>
+				<version>${net.ttddyy.ds.proxy.version}</version>
 			</dependency>
 
 		</dependencies>

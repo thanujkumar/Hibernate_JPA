@@ -48,4 +48,59 @@
             <property name="hibernate.query.fail_on_pagination_over_collection_fetch" value="true"/>
         </properties>
     </persistence-unit>
+
+    <persistence-unit name="HIGH_PERFORMANCE" transaction-type="RESOURCE_LOCAL">
+        <class>playground.model.Contact</class>
+        <class>playground.model.Country</class>
+        <class>playground.model.Location</class>
+        <class>playground.model.Customer</class>
+        <class>playground.model.Employee</class>
+        <class>playground.model.Inventory</class>
+        <class>playground.model.InventoryPK</class>
+        <class>playground.model.Order</class>
+        <class>playground.model.OrderItem</class>
+        <class>playground.model.OrderItemPK</class>
+        <class>playground.model.Product</class>
+        <class>playground.model.ProductCategory</class>
+        <class>playground.model.Region</class>
+        <class>playground.model.Warehouse</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
+        <validation-mode>AUTO</validation-mode>
+        <properties>
+            <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521/orcl"/>
+            <property name="javax.persistence.jdbc.user" value="PLAYGROUND"/>
+            <property name="javax.persistence.jdbc.password" value="PLAYGROUND"/>
+            <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.driver.OracleDriver"/>
+
+            <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle12cDialect"/>
+            <property name="hibernate.default_schema" value="PLAYGROUND"/>
+            <property name="hibernate.id.new_generator_mappings" value="true"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <!--
+             https://vladmihalcea.com/hibernate-aggressive-connection-release/
+             https://access.redhat.com/documentation/en-US/JBoss_Enterprise_Web_Platform/5/html/Hibernate_Core_Reference_Guide/transactions-connection-release.html
+             default is : auto
+
+             org.hibernate.transaction.TransactionFactory.getDefaultReleaseMode() method.
+             For JTATransactionFactory, this returns ConnectionReleaseMode.AFTER_STATEMENT;
+             for JDBCTransactionFactory, this returns ConnectionReleaseMode.AFTER_TRANSACTION.
+             Do not change this default behavior as failures due to the value of this setting tend to
+             indicate bugs and/or invalid assumptions in user code.
+            -->
+            <property name="hibernate.connection.release_mode" value="auto"/>
+            <property name="hibernate.current_session_context_class" value="jta"/>
+            <!--https://vladmihalcea.com/hibernate-statistics-jmx/ -->
+            <property name="hibernate.generate_statistics" value="true"/>
+            <!-- property name="hibernate.jmx.enabled" value="true"/ -->
+            <!--https://vladmihalcea.com/hibernate-query-fail-on-pagination-over-collection-fetch/ -->
+            <property name="hibernate.query.fail_on_pagination_over_collection_fetch" value="true"/>
+            <!--https://www.baeldung.com/jpa-hibernate-batch-insert-update -->
+            <property name="hibernate.jdbc.batch_size" value="10"/>
+            <property name="hibernate.order_inserts" value="true"/>
+            <property name=" hibernate.order_updates" value="true"/>
+            <property name="hibernate.jdbc.batch_versioned_data" value="true"/>
+        </properties>
+    </persistence-unit>
 </persistence>
