@@ -18,7 +18,7 @@ public class JPAFectSizeHandlingSupport {
 
     private final InventoryDAO inventoryDAO;
 
-    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
+    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)//REQUIRED, If Required still enrolls into transactions
     public List<Inventory> usingFetchSize_setAsHibernateProperty() {
         return inventoryDAO.findAll();
     }

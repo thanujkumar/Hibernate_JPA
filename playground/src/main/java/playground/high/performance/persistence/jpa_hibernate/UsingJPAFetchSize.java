@@ -59,7 +59,9 @@ public class UsingJPAFetchSize extends Logging {
     public static void main(String[] args) {
         context = new AnnotationConfigApplicationContext(HighPerformanceJPAJavaConfig.class);
         JPAFectSizeHandlingSupport jpaFetchSize = context.getBean("jpaFetchSizeSupport", JPAFectSizeHandlingSupport.class);
-        List<Inventory> inventoryList = jpaFetchSize.usingFetchSize_setAsHibernateProperty();
+        for (int i = 0; i < 1 ;i++) {
+            List<Inventory> inventoryList = jpaFetchSize.usingFetchSize_setAsHibernateProperty();
+        }
         context.close();
     }
 }

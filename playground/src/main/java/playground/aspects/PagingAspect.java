@@ -27,5 +27,8 @@ public class PagingAspect {
         return null;
     }
 
+    //SELECT * FROM Orders ORDER BY ORDER_ID
+    //OFFSET 10 ROWS
+    //FETCH FIRST 20 ROWS ONLY
 
 }

@@ -9,6 +9,8 @@ import playground.main.Logging;
 
 //https://www.baeldung.com/jpa-hibernate-batch-insert-update
 //https://vladmihalcea.com/hibernate-performance-tuning-tips/
+//https://codete.com/blog/5-common-spring-transactional-pitfalls/
+//https://codete.com/blog/spring-transaction-propagation-modes/
 public class UsingJPABatchingStatements extends Logging {
     static AbstractApplicationContext context;
 

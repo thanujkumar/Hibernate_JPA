@@ -1,6 +1,7 @@
 package playground.dao;
 
 import org.hibernate.Session;
+import org.hibernate.annotations.QueryHints;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 import playground.model.Region;
@@ -23,6 +24,9 @@ public class RegionDAO {
         System.out.println("RegionDAO.findAll TxSync isSyncActive : " + TransactionSynchronizationManager.isSynchronizationActive());
         System.out.println("RegionDAO.findAll TxSync isReadOnly : " + TransactionSynchronizationManager.isCurrentTransactionReadOnly());
         System.out.println("RegionDAO.findAll TxSync isTxActive : " + TransactionSynchronizationManager.isActualTransactionActive());
+
+        //https://vladmihalcea.com/spring-read-only-transaction-hibernate-optimization/
+        //return entityManager.createNamedQuery(Region.QUERY_ALL).setHint(QueryHints.READ_ONLY, true).getResultList();
         return entityManager.createNamedQuery(Region.QUERY_ALL).getResultList();
     }
 
