@@ -6,9 +6,9 @@ import org.springframework.context.support.AbstractApplicationContext;
 import playground.high.performance.config.HighPerformanceJPAJavaConfig;
 import playground.high.performance.persistence.support.JPABatchHandlingSupport;
 import playground.main.Logging;
-import playground.service.RegionService;
 
 //https://www.baeldung.com/jpa-hibernate-batch-insert-update
+//https://vladmihalcea.com/hibernate-performance-tuning-tips/
 public class UsingJPABatchingStatements extends Logging {
     static AbstractApplicationContext context;
 
@@ -40,8 +40,12 @@ public class UsingJPABatchingStatements extends Logging {
      */
 
     /**
+     * https://vladmihalcea.com/hibernate-performance-tuning-tips/
      * Ensure to disable batch size in persistence.xml
-     * hibernate.jdbc.batch_size
+     * hibernate.jdbc.batch_size=10
+     * hibernate.order_inserts=true
+     * hibernate.order_updates=true
+     * hibernate.jdbc.batch_versioned_data=true
      * @param args
      */
     public static void main(String[] args) {

@@ -112,6 +112,7 @@ public class MainJPA_Region_JPQL extends Logging {
 //            System.out.println(x[0] +"--"+x[1]+"---"+x[2]);
 //        });
 
+        //https://vladmihalcea.com/the-best-way-to-map-a-projection-query-to-a-dto-with-jpa-and-hibernate/
         Query query7 = entityMgr.createQuery(
                 "SELECT NEW playground.main.SalesInfo( o.customer.name, sum(oi.quantity*oi.unitPrice), EXTRACT(year from o.orderDate))  FROM Order o INNER JOIN o.orderItems oi INNER JOIN o.customer c WHERE o.status='Shipped' GROUP BY o.customer.name, EXTRACT(year from o.orderDate)");
         List<SalesInfo> salesAmountList = query7.getResultList();

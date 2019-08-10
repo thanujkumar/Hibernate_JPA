@@ -27,8 +27,13 @@ public class GlobalOracleConnectionPool {
 
     private static Properties conProp = new Properties();
      static  {
+         //https://vladmihalcea.com/hibernate-performance-tuning-tips/
          conProp.setProperty(OracleConnection.CONNECTION_PROPERTY_THIN_READ_TIMEOUT, "10000");
          conProp.setProperty(OracleConnection.CONNECTION_PROPERTY_DEFAULT_ROW_PREFETCH, "20");
+         conProp.setProperty(OracleConnection.CONNECTION_PROPERTY_IMPLICIT_STATEMENT_CACHE_SIZE, "20");
+         //Below property to support - https://vladmihalcea.com/hibernate-performance-tuning-tips/ connection management
+         //https://vladmihalcea.com/why-you-should-always-use-hibernate-connection-provider_disables_autocommit-for-resource-local-jpa-transactions/
+         conProp.setProperty(OracleConnection.CONNECTION_PROPERTY_AUTOCOMMIT, "false");
          conProp.setProperty("v$session.program", "HIBERNATE_JPA2");
      }
 

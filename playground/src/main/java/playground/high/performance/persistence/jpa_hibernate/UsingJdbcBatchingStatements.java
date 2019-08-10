@@ -12,8 +12,9 @@ import java.util.Date;
 
 /**
  * Raw jdbc not using hibernate though library is loaded
+ * https://vladmihalcea.com/hibernate-performance-tuning-tips/
  */
-public class UsingJdbcBatchingStatements { //} extends Logging {
+public class UsingJdbcBatchingStatements  extends Logging {
     static AbstractApplicationContext context;
 
     public static void main(String[] args) throws SQLException {

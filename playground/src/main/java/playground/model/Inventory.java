@@ -17,8 +17,10 @@ import java.io.Serializable;
 @EqualsAndHashCode(doNotUseGetters = true)
 @Entity
 @Table(name = "INVENTORIES")
-//@NamedQuery(name = "Inventory.findAll", query = "SELECT i FROM Inventory i")
+@NamedQuery(name = Inventory.QUERY_ALL, query = "SELECT i FROM Inventory i")
 public class Inventory extends AuditAndOptimisticField implements Serializable {
+
+    public static final String QUERY_ALL="Inventory.findAll";
 
     @EmbeddedId
     private InventoryPK id;
