@@ -4,6 +4,8 @@ import net.ttddyy.dsproxy.ExecutionInfo;
 import net.ttddyy.dsproxy.QueryInfo;
 import net.ttddyy.dsproxy.listener.logging.DefaultQueryLogEntryCreator;
 import net.ttddyy.dsproxy.listener.logging.SystemOutQueryLoggingListener;
+import oracle.ucp.jdbc.PoolDataSource;
+import oracle.ucp.jdbc.PoolDataSourceImpl;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.hibernate.engine.jdbc.internal.FormatStyle;
@@ -54,9 +56,13 @@ public class DataSourceProxyBeanPostProcessor implements BeanPostProcessor {
             SystemOutQueryLoggingListener listener = new SystemOutQueryLoggingListener();
             listener.setQueryLogEntryCreator(creator);
 
+             String poolName = null;
+             if (dataSource instanceof PoolDataSource) {
+                 poolName = ((PoolDataSource)dataSource).getConnectionPoolName();
+             }
             this.dataSource = ProxyDataSourceBuilder
                     .create(dataSource)
-                    .name("THANUJ-DS")
+                    .name(poolName)
                     .listener(listener)
                     .beforeQuery(new ProxyDataSourceBuilder.SingleQueryExecution() {
                         @Override

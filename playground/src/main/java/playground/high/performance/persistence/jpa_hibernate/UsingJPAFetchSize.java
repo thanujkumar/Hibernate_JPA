@@ -63,5 +63,6 @@ public class UsingJPAFetchSize extends Logging {
             List<Inventory> inventoryList = jpaFetchSize.usingFetchSize_setAsHibernateProperty();
         }
         context.close();
+
     }
 }

@@ -3,6 +3,14 @@
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
     <!-- http://www.oracle.com/webfolder/technetwork/jsc/xml/ns/persistence/persistence_2_1.xsd -->
+    <!--
+      org.hibernate.engine.jdbc.connections.spi.ConnectionProvider
+       (DataSourceConnectionProviderImpl,
+        DriverManagerConnectionProviderImpl (this needs drivername, username etc as hibernate or jpa properties, no pooling,
+        UserSuppliedConnectionProviderImpl)
+
+       "hibernate.connection.provider_class"
+    -->
 
     <persistence-unit name="PLAYGROUND" transaction-type="RESOURCE_LOCAL">
         <class>playground.model.Contact</class>
@@ -26,10 +34,10 @@
         <!-- Below properties are not required when loaded by Spring where it can be set in JavaConfig, required when used as standalone -->
 
         <properties>
-            <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521/orcl"/>
+            <!-- property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521/orcl"/>
             <property name="javax.persistence.jdbc.user" value="PLAYGROUND"/>
             <property name="javax.persistence.jdbc.password" value="PLAYGROUND"/>
-            <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.driver.OracleDriver"/>
+            <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.driver.OracleDriver"/ -->
 
             <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle12cDialect"/>
             <property name="hibernate.default_schema" value="PLAYGROUND"/>
@@ -68,13 +76,14 @@
         <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
         <validation-mode>AUTO</validation-mode>
         <properties>
-            <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521/orcl"/>
+            <!-- property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521/orcl"/>
             <property name="javax.persistence.jdbc.user" value="PLAYGROUND"/>
             <property name="javax.persistence.jdbc.password" value="PLAYGROUND"/>
-            <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.driver.OracleDriver"/>
+            <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.driver.OracleDriver"/ -->
 
             <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle12cDialect"/>
             <property name="hibernate.default_schema" value="PLAYGROUND"/>
+            <!-- Required if Hibernate version is below 5 so to avoid old hilo generator -->
             <property name="hibernate.id.new_generator_mappings" value="true"/>
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
@@ -89,10 +98,12 @@
              Do not change this default behavior as failures due to the value of this setting tend to
              indicate bugs and/or invalid assumptions in user code.
             -->
-            <property name="hibernate.connection.release_mode" value="auto"/>
+            <property name="hibernate.connection.release_mode" value="after_transaction"/>
             <property name="hibernate.current_session_context_class" value="jta"/>
+
             <!--https://vladmihalcea.com/hibernate-statistics-jmx/ -->
             <property name="hibernate.generate_statistics" value="true"/>
+            <!-- property name="hibernate.use_sql_comments" value="true" /-->
             <!-- property name="hibernate.jmx.enabled" value="true"/ -->
             <!--https://vladmihalcea.com/hibernate-query-fail-on-pagination-over-collection-fetch/ -->
             <property name="hibernate.query.fail_on_pagination_over_collection_fetch" value="true"/>
@@ -107,6 +118,9 @@
             <!-- https://vladmihalcea.com/why-you-should-always-use-hibernate-connection-provider_disables_autocommit-for-resource-local-jpa-transactions/ -->
             <!-- autocommit is set to false in GlobalOracleConnectionPool setting for connection to support below property, else exception is thrown as by default connection is autocommit mode -->
             <property name="hibernate.connection.provider_disables_autocommit" value="true"/>
+
+             <!-- Custom stats -->
+            <property name="hibernate.stats.factory" value="playground.high.performance.stats.TransactionStatisticsFactory"/>
         </properties>
     </persistence-unit>
 </persistence>
