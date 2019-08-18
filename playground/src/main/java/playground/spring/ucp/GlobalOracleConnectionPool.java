@@ -1,6 +1,9 @@
 package playground.spring.ucp;
 
 import oracle.jdbc.OracleConnection;
+import oracle.ucp.UniversalConnectionPoolAdapter;
+import oracle.ucp.UniversalConnectionPoolException;
+import oracle.ucp.admin.UniversalConnectionPoolManagerImpl;
 import oracle.ucp.jdbc.PoolDataSource;
 import oracle.ucp.jdbc.PoolDataSourceFactory;
 import oracle.ucp.jdbc.PoolXADataSource;
@@ -53,6 +56,13 @@ public class GlobalOracleConnectionPool {
         dataSource.setInactiveConnectionTimeout(300);//5min
         dataSource.setConnectionPoolName("PLAYGROUND_POOL");
         dataSource.setConnectionProperties(conProp);
+        try {
+            UniversalConnectionPoolManagerImpl.getUniversalConnectionPoolManager().createConnectionPool((UniversalConnectionPoolAdapter) dataSource);
+            UniversalConnectionPoolManagerImpl.getUniversalConnectionPoolManager().startConnectionPool(dataSource.getConnectionPoolName());
+        } catch (UniversalConnectionPoolException e) {
+            throw new SQLException(e);
+        }
+
         return dataSource;
     }
 
@@ -70,6 +80,12 @@ public class GlobalOracleConnectionPool {
         dataSource.setInactiveConnectionTimeout(300);//5min
         dataSource.setConnectionPoolName("PLAYGROUND_XA_POOL");
         dataSource.setConnectionProperties(conProp);
+        try {
+            UniversalConnectionPoolManagerImpl.getUniversalConnectionPoolManager().createConnectionPool((UniversalConnectionPoolAdapter) dataSource);
+            UniversalConnectionPoolManagerImpl.getUniversalConnectionPoolManager().startConnectionPool(dataSource.getConnectionPoolName());
+        } catch (UniversalConnectionPoolException e) {
+            throw new SQLException(e);
+        }
         return dataSource;
     }
 
