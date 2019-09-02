@@ -5,16 +5,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import playground.dao.InventoryDAO;
-import playground.dao.RegionDAO;
 import playground.model.Inventory;
-import playground.model.Region;
 
 import javax.inject.Inject;
 import java.util.List;
 
 @Service("jpaFetchSizeSupport")
 @RequiredArgsConstructor(onConstructor = @__(@Inject))
-public class JPAFectSizeHandlingSupport {
+public class JPAFetchSizeHandlingSupport {
 
     private final InventoryDAO inventoryDAO;
 

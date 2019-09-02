@@ -3,7 +3,7 @@ package playground.high.performance.persistence.jpa_hibernate;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 import playground.high.performance.config.HighPerformanceJPAJavaConfig;
-import playground.high.performance.persistence.support.JPAFectSizeHandlingSupport;
+import playground.high.performance.persistence.support.JPAFetchSizeHandlingSupport;
 import playground.main.Logging;
 import playground.model.Inventory;
 
@@ -58,7 +58,7 @@ public class UsingJPAFetchSize extends Logging {
      */
     public static void main(String[] args) {
         context = new AnnotationConfigApplicationContext(HighPerformanceJPAJavaConfig.class);
-        JPAFectSizeHandlingSupport jpaFetchSize = context.getBean("jpaFetchSizeSupport", JPAFectSizeHandlingSupport.class);
+        JPAFetchSizeHandlingSupport jpaFetchSize = context.getBean("jpaFetchSizeSupport", JPAFetchSizeHandlingSupport.class);
         for (int i = 0; i < 1 ;i++) {
             List<Inventory> inventoryList = jpaFetchSize.usingFetchSize_setAsHibernateProperty();
         }

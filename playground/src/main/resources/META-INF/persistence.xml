@@ -34,10 +34,10 @@
         <!-- Below properties are not required when loaded by Spring where it can be set in JavaConfig, required when used as standalone -->
 
         <properties>
-            <!-- property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521/orcl"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521/orcl"/>
             <property name="javax.persistence.jdbc.user" value="PLAYGROUND"/>
             <property name="javax.persistence.jdbc.password" value="PLAYGROUND"/>
-            <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.driver.OracleDriver"/ -->
+            <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.driver.OracleDriver"/>
 
             <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle12cDialect"/>
             <property name="hibernate.default_schema" value="PLAYGROUND"/>
