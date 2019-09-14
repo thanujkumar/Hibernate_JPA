@@ -36,7 +36,7 @@ import playground.model.Region;
  * forget to start a transactional context. Nevertheless, it's always better to declare transaction boundaries even for read-only
  * transactions (in Spring @Transactional allows you to mark read-only transactions, which has a great performance benefit).
  */
-public class MainJPA_Region_JPQL extends Logging {
+public class MainJPA_Region_JPQL extends Logging2 {
 
     public static void main(String[] args) {
         EntityManagerFactory entityMgrFactory = Persistence.createEntityManagerFactory("PLAYGROUND");

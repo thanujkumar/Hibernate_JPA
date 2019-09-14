@@ -5,6 +5,7 @@ import org.springframework.context.support.AbstractApplicationContext;
 import playground.high.performance.config.HighPerformanceJPAJavaConfig;
 import playground.high.performance.persistence.support.JPAInClauseHandlingSupport;
 import playground.main.Logging;
+import playground.main.Logging2;
 import playground.model.Order;
 
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
 //https://vladmihalcea.com/improve-statement-caching-efficiency-in-clause-parameter-padding/
 //https://vladmihalcea.com/hibernate-performance-tuning-tips/
 //hibernate.query.in_clause_parameter_padding=true
-public class UsingInClausePadding  extends Logging {
+public class UsingInClausePadding  extends Logging2 {
     static AbstractApplicationContext context;
 
     public static void main(String[] args) {

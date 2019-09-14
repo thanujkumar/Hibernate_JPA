@@ -98,9 +98,8 @@
              Do not change this default behavior as failures due to the value of this setting tend to
              indicate bugs and/or invalid assumptions in user code.
             -->
-            <property name="hibernate.connection.release_mode" value="after_transaction"/>
-            <property name="hibernate.current_session_context_class" value="jta"/>
-
+           <property name="hibernate.transaction.jta.platform" value="JBossTS"/>
+           <property name="hibernate.connection.handling_mode" value="DELAYED_ACQUISITION_AND_RELEASE_AFTER_TRANSACTION"/>
             <!--https://vladmihalcea.com/hibernate-statistics-jmx/ -->
             <property name="hibernate.generate_statistics" value="true"/>
             <!-- property name="hibernate.use_sql_comments" value="true" /-->
